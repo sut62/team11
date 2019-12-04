@@ -45,7 +45,5 @@ public class MedicalResult {
     @OneToOne
     private Patient patient;
 
-    @ManyToOne
-    private PatientType patientType;
-    
+
 }
