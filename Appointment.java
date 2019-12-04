@@ -1,5 +1,6 @@
 package com.okta.springbootvue.entity;
 
+import lombok.Data;
 import lombok.*;
 
 import javax.persistence.Id;
