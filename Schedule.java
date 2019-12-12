@@ -35,17 +35,13 @@ public class Schedule {
 
     private @NonNull Date scheduledate;
     
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Department.class)
-    @JoinColumn(name="DepartmentId", insertable = true)
-    private Department department;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Profile.class)
-    @JoinColumn(name="ProfileId", insertable = true)
-    private Profile profile;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Worktime.class)
     @JoinColumn(name="WorktimeId", insertable = true)
     private Worktime worktime;
    
+    
+
 
 }
