@@ -1,4 +1,4 @@
-package com.okta.springbootvue.Entity;
+package com.okta.cpe.Entity;
 
 import lombok.*;
 import javax.persistence.Id;
@@ -26,7 +26,7 @@ import javax.persistence.GenerationType;
 @ToString
 @EqualsAndHashCode
 @Table(name="Worktime")
-public class Schedule {
+public class Worktime {
     @Id    
     @SequenceGenerator(name="worktime_SEQ",sequenceName="worktime_SEQ")               
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="worktime_SEQ")
