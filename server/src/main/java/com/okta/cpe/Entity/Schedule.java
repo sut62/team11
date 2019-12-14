@@ -9,7 +9,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.Collection;
 
@@ -38,7 +37,7 @@ public class Schedule {
 
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Worktime.class)
-    @JoinColumn(name="WorktimeId", insertable = true)
+    @JoinColumn(name="WORKTIME", insertable = true)
     private Worktime worktime;
    
     

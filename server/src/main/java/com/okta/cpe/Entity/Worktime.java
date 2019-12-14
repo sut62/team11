@@ -9,7 +9,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.Collection;
 
@@ -33,7 +32,8 @@ public class Worktime {
     @Column(name="WORKTIME_Id",unique = true, nullable = true)
     private @NonNull Long worktimeId;
     
-    
+    @Column(name="WORKTIME",unique = true, nullable = true)
+    private @NonNull Long wworktime;
    
 
 }
