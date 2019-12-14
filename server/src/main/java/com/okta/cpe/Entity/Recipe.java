@@ -1,4 +1,4 @@
-package com.okta.cpe.Entity;
+package com.nondt.backend.Entity;
 
 import lombok.*;
 import javax.persistence.Id;
@@ -21,7 +21,6 @@ public class Recipe {
     private  Long number;
     private  String amount;
     private Date date;
-    private String name;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Medicine.class)
     private Medicine medicine;
@@ -54,11 +53,5 @@ public class Recipe {
         this.date = date;
     }
 
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
 
 }
