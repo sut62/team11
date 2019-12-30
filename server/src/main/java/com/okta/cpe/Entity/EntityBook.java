@@ -37,7 +37,7 @@ public class EntityBook {
     @DateTimeFormat(pattern = "dd-M-yyyy hh:mm:ss")
     private @NonNull Date EndBookDate;
   
-    private @NonNull String SAddress_of_Staff;
+    private @NonNull String Case;
 
     @Column(name="BookDate ")
     private @NonNull Date BookDate;
@@ -46,5 +46,9 @@ public class EntityBook {
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Room.class)
     @JoinColumn(name = "ID_Room", insertable = true)
     private Room Room;
+
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = PatientManagement.class)
+    @JoinColumn(name = "patientManage_id", insertable = true)
+    private PatientManagement patientManagement ;
 
 }
