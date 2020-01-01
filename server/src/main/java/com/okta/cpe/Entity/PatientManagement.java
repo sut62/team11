@@ -1,4 +1,4 @@
-package com.okta.springbootvue.entity;
+package com.okta.cpe.Entity;
 
 import lombok.*;
 

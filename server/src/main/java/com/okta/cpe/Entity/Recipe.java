@@ -1,4 +1,4 @@
-package com.nondt.backend.Entity;
+package com.okta.cpe.Entity;
 
 import lombok.*;
 import javax.persistence.Id;

@@ -1,4 +1,4 @@
-package com.okta.Entity;
+package com.okta.cpe.Entity;
 
 import lombok.*;
 import javax.persistence.*;
