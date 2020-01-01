@@ -26,8 +26,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class EntityBook {
 
     @Id
-    @SequenceGenerator(name="EntityBook",sequenceName="EntityBook")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="EntityBook")
+    @SequenceGenerator(name="EntityBook_seq",sequenceName="EntityBook_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="EntityBook_seq")
     @Column(name = "ID_Book", unique = true, nullable = true)
     private @NonNull Long ID_Book;
 
@@ -43,9 +43,9 @@ public class EntityBook {
     private @NonNull Date BookDate;
     
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Room.class)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = EntityRoom.class)
     @JoinColumn(name = "ID_Room", insertable = true)
-    private Room Room;
+    private EntityRoom Room;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = PatientManagement.class)
     @JoinColumn(name = "patientManage_id", insertable = true)
