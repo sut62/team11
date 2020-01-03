@@ -31,7 +31,7 @@ public class Profile {
     @Column(name = "ProfileId", unique = true, nullable = true)
     private @NonNull Long profile_id;
 
-    @Column(name = "Profile_DATE")
+    @Column(name = "Profile")
     private @NonNull String name;
     private @NonNull Long age;
     private @NonNull String address;
