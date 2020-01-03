@@ -26,7 +26,7 @@ import java.util.Date;
 @ToString
 @EqualsAndHashCode
 @Table(name="Appointment")
-public class MedicalResult {
+public class Appointment {
 
     @Id
     @SequenceGenerator(name="appointment_seq",sequenceName="appointment_seq")
