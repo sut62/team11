@@ -31,9 +31,6 @@ public class Worktime {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="worktime_SEQ")
     @Column(name="WORKTIME_Id",unique = true, nullable = true)
     private @NonNull Long worktimeId;
-    
-    @Column(name="WORKTIME",unique = true, nullable = true)
-    private @NonNull Long wworktime;
-   
-
+    private @NonNull String work;
 }
+   
