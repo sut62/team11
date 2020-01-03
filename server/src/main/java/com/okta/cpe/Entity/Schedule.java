@@ -34,13 +34,21 @@ public class Schedule {
 
     private @NonNull Date scheduledate;
     
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Profile.class)
+    @JoinColumn(name = "ProfileId", unique = true, nullable = true)
+    private @NonNull Long profile_id;
 
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Department.class)
+    @JoinColumn(name = "DepartmentID", nullable = true)
+    private @NonNull Long department_id;
+    
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Worktime.class)
     @JoinColumn(name="WORKTIME", insertable = true)
     private Worktime worktime;
    
     
+
 
 
 }
