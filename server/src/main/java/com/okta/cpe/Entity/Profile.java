@@ -37,18 +37,22 @@ public class Profile {
     private @NonNull String address;
 
 
-    @ManyToOne
-    @JoinColumn( unique = true, nullable = true)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Gender.class)
+    @JoinColumn( name = "GendertID", nullable = true)
     private Gender gender;
     
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Maritalstatus.class)
     @JoinColumn(name = "MaritalstatusID",  nullable = true)
     private Maritalstatus maritalstatus;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Department.class)
     @JoinColumn(name = "DepartmentId", insertable = true)
     private Department department;
+
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Blood.class)
+    @JoinColumn(name = "Blood_ID", insertable = true)
+    private Blood blood;
 
     
 
