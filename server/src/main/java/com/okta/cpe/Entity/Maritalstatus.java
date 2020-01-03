@@ -16,6 +16,6 @@ public class Maritalstatus {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Maritalstatustseq")
 	@Column(name = "MaritalstatusID", nullable = true)
 
-	private @NonNull Long id;
+	private @NonNull Long status_id;
 	private @NonNull String status;
 }

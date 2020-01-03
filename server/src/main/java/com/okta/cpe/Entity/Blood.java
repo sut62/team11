@@ -16,6 +16,6 @@ public class Blood {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Bloodtseq")
 	@Column(name = "Blood_ID", nullable = true)
 
-	private @NonNull Long id;
+	private @NonNull Long blood_id;
 	private @NonNull String blood;
 }

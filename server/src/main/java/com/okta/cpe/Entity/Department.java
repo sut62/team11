@@ -16,6 +16,6 @@ public class Department {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Departmentseq")
 	@Column(name = "DepartmentID", nullable = true)
 
-	private @NonNull Long id;
+	private @NonNull Long department_id;
 	private @NonNull String department;
 }

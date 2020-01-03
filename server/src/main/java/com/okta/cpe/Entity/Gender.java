@@ -15,6 +15,6 @@ public class Gender {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Genderseq")
 	@Column(name = "GendertID", nullable = true)
 
-	private @NonNull Long id;
+	private @NonNull Long gender_id;
 	private @NonNull String gender;
 }
