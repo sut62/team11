@@ -22,13 +22,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name="EntityBook")
-public class EntityBook {
+@Table(name="BookRoom")
+public class BookRoom {
 
     @Id
-    @SequenceGenerator(name="EntityBook_seq",sequenceName="EntityBook_seq")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="EntityBook_seq")
-    @Column(name = "ID_Book", unique = true, nullable = true)
+    @SequenceGenerator(name="BookRoom_seq",sequenceName="BookRoom_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="BookRoom_seq")
+    @Column(name = "ID_BookRoom", unique = true, nullable = true)
     private @NonNull Long ID_Book;
 
     @DateTimeFormat(pattern = "dd-M-yyyy hh:mm:ss")
@@ -43,9 +43,9 @@ public class EntityBook {
     private @NonNull Date BookDate;
     
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = EntityRoom.class)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Room.class)
     @JoinColumn(name = "ID_Room", insertable = true)
-    private EntityRoom Room;
+    private Room Room;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = PatientManagement.class)
     @JoinColumn(name = "patientManage_id", insertable = true)

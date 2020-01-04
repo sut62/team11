@@ -1,4 +1,4 @@
-package com.example.springbootvue;
+package com.okta.cpe;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
