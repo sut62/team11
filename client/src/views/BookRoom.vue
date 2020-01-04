@@ -40,7 +40,7 @@
     <v-row align="center">
       <v-col class="d-flex" cols="1" sm="3" >
       <v-datetime-picker
-        label="เวลาเริ่ม"
+        label="เวลาเริ่มต้น"
         v-model="datetimeStart">
       </v-datetime-picker>
       </v-col>
