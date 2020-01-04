@@ -5,9 +5,9 @@ import javax.persistence.*;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "EntityRoom")
+@Table(name = "Room")
 
-public class EntityRoom {
+public class Room {
 
 	@Id
 	@SequenceGenerator(name = "Room_seq", sequenceName = "Room_seq")
