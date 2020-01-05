@@ -1,21 +1,14 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
-import BookRoom from '../views/BookRoom'
+   import Router from 'vue-router';
+   import Profile from '../components/Profile';
+   //import Index from '../components/Index';
+   Vue.use(Router);
 
-Vue.use(VueRouter)
-
-const routes = [
-  {
-    path: '/',
-    name: 'BookRoom',
-    component: BookRoom
-  }
-]
-
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
-})
-
-export default router
+   export default new Router({
+       mode: 'history',
+       base: process.env.BASE_URL,
+       routes: [
+       {path: '/profile',component: Profile},
+       //{path: '/',component: Index}
+       ]
+   });
