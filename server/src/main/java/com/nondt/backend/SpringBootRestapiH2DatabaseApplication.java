@@ -18,7 +18,7 @@ public class SpringBootRestapiH2DatabaseApplication {
 
     @Bean
     ApplicationRunner init(BloodRepository bloodRepository , DepartmentRepository  departmentRepository
-    , ProfileRepository profileRepository , GenderRepository genderRepository , MaritalstatusRepository maritalstatusRepository) {
+    , ProfileRepository profileRepository , GenderRepository genderRepository , MaritalstatusRepository maritalstatusRepository , RoomRepository roomrepository) {
         return args -> {
 
 
@@ -47,6 +47,12 @@ public class SpringBootRestapiH2DatabaseApplication {
                 genderRepository.save(gender);
             });
 
+            Stream.of( "ห้องผ่าตัด1","ห้องผ่าตัด2","ห้องผ่าตัด 3","ห้องตรวจ 1","ห้องตรวจ 2","ห้องตรวจภายใน","ห้องฉายรังสี",
+            "ห้อง CT Scan1","ห้อง CT Scan 2","ห้อง X-ray","ห้องกายภาพ").forEach(rooms -> {
+                Room room = new Room();
+                room.setNameRoom(rooms);
+                roomrepository.save(room);   
+             });
         };
     }
 }

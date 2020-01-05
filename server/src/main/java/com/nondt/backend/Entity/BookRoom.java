@@ -25,7 +25,7 @@ public class BookRoom{
     @Id
 	@SequenceGenerator(name = "bookroom_seq", sequenceName = "bookroom_seq")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bookroom_seq")
-    private long bookroom_id;
+    private long id;
 
     private String ceas;
 
