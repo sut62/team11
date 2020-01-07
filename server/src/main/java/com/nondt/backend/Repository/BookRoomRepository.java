@@ -10,5 +10,4 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public
 interface BookRoomRepository extends JpaRepository<BookRoom, Long> {
     BookRoom findById(long id);
-
 }
