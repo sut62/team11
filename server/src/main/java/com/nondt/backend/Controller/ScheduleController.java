@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,6 +26,7 @@ public class ScheduleController {
     private WorktimeRepository worktimeRepository;
     @Autowired
     private ProfileRepository profileRepository;
+
     public ScheduleController(ScheduleRepository scheduleRepository) {
         this.scheduleRepository = scheduleRepository;
     }
@@ -34,43 +36,26 @@ public class ScheduleController {
         return scheduleRepository.findAll().stream().collect(Collectors.toList());
     }
 
-
     @PostMapping("/schedule/{profileSelect}/{departSelect}/{selectedDate}/{timeSelect}")
-    public void newRecipe(
+    public Schedule newschedule(Schedule newschedule,
+            @PathVariable long profileSelect,
+            @PathVariable long departSelect,
+            @PathVariable String selectedDate,
+            @PathVariable long timeSelect) {
+
+        Profile profile = profileRepository.findById(profileSelect);
+        Department department = departmentRepository.findById(departSelect);
+        Worktime worktime = worktimeRepository.findById(timeSelect);
         
-                        
-                        @PathVariable long profileSelect,
-                        @PathVariable long departSelect,
-                        @PathVariable String selectedDate,
-                        @PathVariable long timeSelect
-                        ) 
-                  {
-                    
-                    Profile profile = profileRepository.findById(profileSelect);
-                    
-                    Department department = departmentRepository.findById(departSelect);
-                    Worktime worktime = worktimeRepository.findById(timeSelect);
-                    Schedule schedule = new Schedule();
-                    schedule.setDepartment_id(department);
-                    schedule.setWorktime(worktime);
-                    schedule.setProfile_id(profile);
-                    
-                    String[] b = selectedDate.split(" ");
-            int year = Integer.valueOf(b[3]);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate scheduledate = LocalDate.parse(selectedDate, formatter);
 
-            int day = Integer.valueOf(b[2]);
-            int month = 1 ;
+        newschedule.setProfile_id(profile);
+        newschedule.setDepartment_id(department);
+        newschedule.setScheduledate(scheduledate);
+        newschedule.setWorktime(worktime);
 
-            if(b[1].equalsIgnoreCase("Jan")){ month = 1;}else if(b[1].equalsIgnoreCase("Feb")){ month = 2;}
-            else if(b[1].equalsIgnoreCase("Mar")){ month = 3;}else if(b[1].equalsIgnoreCase("Mar")){ month = 4;}
-            else if(b[1].equalsIgnoreCase("May")){ month = 5;}else if(b[1].equalsIgnoreCase("Jun")){ month = 6;}
-            else if(b[1].equalsIgnoreCase("Jul")){ month = 7;}else if(b[1].equalsIgnoreCase("Aug")){ month = 8;}
-            else if(b[1].equalsIgnoreCase("Sep")){ month = 9;}else if(b[1].equalsIgnoreCase("Oct")){ month = 10;}
-            else if(b[1].equalsIgnoreCase("Nov")){ month = 11;}else if(b[1].equalsIgnoreCase("Dec")){ month = 12;}
+        return scheduleRepository.saveAndFlush(newschedule);
 
-
-            LocalDate localDate = LocalDate.of(year,month,day);
-            schedule.setScheduledate(localDate);
-            scheduleRepository.save(schedule);
     }
 }
