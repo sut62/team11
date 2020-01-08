@@ -17,7 +17,9 @@ public class SpringBootRestapiH2DatabaseApplication {
     }
 
     @Bean
-    ApplicationRunner init(BloodRepository bloodRepository , DepartmentRepository  departmentRepository, ProfileRepository profileRepository , GenderRepository genderRepository , MaritalstatusRepository maritalstatusRepository) {
+    ApplicationRunner init(BloodRepository bloodRepository , DepartmentRepository  departmentRepository, AppointmenttimeRepository appointmenttimeRepository
+    , ProfileRepository profileRepository , GenderRepository genderRepository , MaritalstatusRepository maritalstatusRepository 
+    , MedicineRepository MedicineRepository , TypemedicineRepository typemedicineRepository,WorktimeRepository worktimeRepository) {
         return args -> {
 
 
@@ -44,6 +46,30 @@ public class SpringBootRestapiH2DatabaseApplication {
                 Gender gender = new Gender();
                 gender.setGender(genders);
                 genderRepository.save(gender);
+            });
+
+            Stream.of( "10:00-12:00 น.","13:00-15:00 น.","18:00-20:00 น.").forEach(timeap -> {
+                Appointmenttime appointmenttime = new Appointmenttime();
+                appointmenttime.setTimeap(timeap);
+                appointmenttimeRepository.save(appointmenttime);
+            });
+
+            Stream.of( "ยาพารา","ยาแก้ปวด","ยาแก้ไข้").forEach(timeap -> {
+                Medicine medicine = new Medicine();
+                medicine.setMedicine_name(timeap);
+                MedicineRepository.save(medicine);
+            });
+
+            Stream.of( "เม็ด","แคปซูล","น้ำ","ผง" ).forEach(timeap -> {
+                Typemedicine typemedicine = new Typemedicine();
+                typemedicine.setTypemedicine_name(timeap);
+                typemedicineRepository.save(typemedicine);
+            });
+
+            Stream.of( "เช้า","บ่าย","ดึก" ).forEach(worktime1 -> {
+                Worktime worktime = new Worktime();
+                worktime.setWork(worktime1);
+                worktimeRepository.save(worktime);
             });
         };
     }

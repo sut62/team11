@@ -35,6 +35,11 @@ public class PatientManagementController {
         return patientRepository.findAll().stream().collect(Collectors.toList());
     }
 
+    @GetMapping("/patientmanage")
+    public Collection<PatientManagement> patientmanages() {
+        return patientManagementRepository.findAll().stream().collect(Collectors.toList());
+    }
+
     @PostMapping("/patientmanagement/{profileSelect}/{departSelect}/{title}/{name}/{genSelect}/{age}/{pati}/{date}")
     public void newPatientManagement(
 
