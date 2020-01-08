@@ -25,7 +25,6 @@ import javax.persistence.GenerationType;
 
 @Data
 @Entity
-
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
@@ -37,9 +36,8 @@ public class Schedule {
     @Column(name="SCHEDULE_Id",unique = true, nullable = true)
     private @NonNull Long scheduleId;
 
-    
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate scheduledate;
+
+    private @NonNull LocalDate scheduledate;
     
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Profile.class)
     @JoinColumn(name = "ProfileId", unique = true, nullable = true)
