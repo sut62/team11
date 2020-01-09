@@ -21,7 +21,7 @@ public class RoomData implements ApplicationRunner {
         Stream.of( "ห้องผ่าตัด1","ห้องผ่าตัด2","ห้องผ่าตัด 3","ห้องตรวจ 1","ห้องตรวจ 2","ห้องตรวจภายใน","ห้องฉายรังสี",
         "ห้อง CT Scan1","ห้อง CT Scan 2","ห้อง X-ray","ห้องกายภาพ").forEach(rooms -> {
             Room room = new Room();
-            room.setName(rooms);
+            room.setRoom(rooms);
             roomRepository.save(room);
         });
         roomRepository.findAll().forEach(System.out::println); 
