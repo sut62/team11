@@ -30,19 +30,19 @@ public class SpringBootRestapiH2DatabaseApplication {
             });
 
 
-            Stream.of( "doctor","Ndoctor").forEach(departments -> {
+            Stream.of( "แผนกฉุกเฉินและอุบัติเหตุ","แผนกรังสีกรรม","แผนกห้องปฏิบัติการทางการแพทย์","แผนกศัลยกรรม","แผนกวิสัญญี","แผนกกุมารเวชกรรม","แผนกอายุรกรรม").forEach(departments -> {
                 Department department = new Department();
                 department.setDepartment(departments);
                 departmentRepository.save(department);
             });
 
-            Stream.of( "S","NS").forEach(maritalstatuss -> {
+            Stream.of( "โสด","สมรส").forEach(maritalstatuss -> {
                 Maritalstatus maritalstatus = new Maritalstatus();
                 maritalstatus.setStatus(maritalstatuss);
                 maritalstatusRepository.save(maritalstatus);
             });
 
-            Stream.of( "M","FM").forEach(genders -> {
+            Stream.of( "หญิง","ชาย").forEach(genders -> {
                 Gender gender = new Gender();
                 gender.setGender(genders);
                 genderRepository.save(gender);
