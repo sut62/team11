@@ -1,5 +1,6 @@
 <template>
 <html>
+  <Navbar/>
 <body background="w.jpg">
 <br>
 <br>
@@ -64,8 +65,12 @@
 </template> 
 
 <script>
+import Navbar from '../components/Navbar'
 import http from "../http-common";
 export default {
+   components: {
+    Navbar
+  },
 data() {
     return {
     medicines : null,

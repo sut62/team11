@@ -1,4 +1,4 @@
-package com.nondt.backend;
+package com.nondt.backend.Dataloader;
 
 import java.util.stream.Stream;
 
@@ -11,7 +11,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RoomData implements ApplicationRunner {
+public class RoomDataloder implements ApplicationRunner {
 
 	@Autowired
 	private RoomRepository roomRepository;

@@ -1,5 +1,6 @@
 <template>
 <html>
+  <Navbar/>
 
 <md-tabs class="md-primary" md-alignment="centered">
      
@@ -87,8 +88,12 @@
 </html>
 </template>
 <script>
+import Navbar from '../components/Navbar'
 import http from "../http-common";
 export default {
+   components: {
+    Navbar
+  },
 data() {
     return {
       profiles: null,

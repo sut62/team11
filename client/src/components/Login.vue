@@ -13,7 +13,7 @@
                       <v-row class="justify-center">
                         <v-icon size="50" color="red">account_circle</v-icon>
                         <v-card-text>
-                          <h1>HUMAN RESOURCE ADMIN</h1>
+                          <h1>LOGIN</h1>
                           <v-form>
                             <v-text-field
                               color="red"
@@ -78,11 +78,11 @@ export default {
         alert("กรุณากรอก username และ password.");
       } else{
       http
-        .get("/adminHR" + "/" + this.username + "/" + this.password)
+        .get("/admin" + "/" + this.username + "/" + this.password)
         .then(response => {
           this.Logins = response.data;
           console.log(this.Logins);
-          this.$router.push('/HR')
+          this.$router.push('/profile')
         })
         .catch(e => {
           console.log(e);

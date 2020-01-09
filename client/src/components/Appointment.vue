@@ -1,5 +1,6 @@
 <template>
 <html>
+  <Navbar/>
 <body>
 
     <md-field>
@@ -38,8 +39,12 @@
 </template> 
 
 <script>
+import Navbar from '../components/Navbar'
 import http from "../http-common";
 export default {
+   components: {
+    Navbar
+  },
 data() {
     return {
         timeappointmentSelect : null,

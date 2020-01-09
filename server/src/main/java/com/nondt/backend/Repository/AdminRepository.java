@@ -1,11 +1,12 @@
-package com.cpe.backend.repository.employee;
+package com.nondt.backend.Repository;
 
-import com.cpe.backend.entity.employee_entity.*;
+
+import com.nondt.backend.Entity.*;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
-public interface AdminHRRepository extends JpaRepository<AdminHR, Long> {
+public interface AdminRepository extends JpaRepository<Admin, Long> {
    
 }
