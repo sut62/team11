@@ -1,16 +1,14 @@
 <template>
 <html>
   <Navbar/>
-<body background="w.jpg">
-<br>
-<br>
-<br>
+<body background="ooy.png">
 <center>
-<br>
-<br>
-<br>
-<br>
-<br>
+<br>   
+<br>   
+<br>   
+<br>   
+<br>   
+<br> 
  <md-field>
           <label >แผนก</label>
           <md-select v-model="departSelect">
@@ -25,7 +23,7 @@
 
     <md-field>
       <label>อายุ</label>
-      <md-input v-model="age"></md-input>
+      <md-input v-model="age" type="number"></md-input>
     </md-field>
   
   <md-field>
@@ -51,20 +49,19 @@
     
     <md-field>
       <label>เบอร์</label>
-      <md-input v-model="tel"></md-input>
+      <md-input v-model="tel" type="number" md-counter="10"></md-input>
     </md-field>
+
 
     <md-field>
       <label>ที่อยู่</label>
-      <md-input v-model="address"></md-input>
+      <md-textarea v-model="address" md-counter="80"></md-textarea>
     </md-field>
+
+
     <br/>
-    <md-button class="md-raised" @click="savedata()">Save</md-button>
-
+    <md-button class="md-raised md-primary" @click="savedata()">บันทึกข้อมูล</md-button>
         <br>
-        
-
-
 
 
 </center>
@@ -96,7 +93,7 @@ data() {
     matSelect : null
     };
   },
-  methods: {
+    methods: {
         /* eslint-disable no-console */
     
     getBlood() {
@@ -152,8 +149,11 @@ data() {
         },
 
         savedata(){
-
-          http
+                if(this.departSelect==null||this.name==null||this.genSelect==null||this.age==null||this.bloodSelect==null||this.tel==null||this.address==null||this.matSelect==null ){
+                      alert("บันทึกข้อมูลไม่สำเร็จ กรุณากรอกข้อมูลให้ครบ");
+                    }
+               else
+          { http
                     .post(
                       "/profile/" +
                         this.departSelect +
@@ -167,7 +167,8 @@ data() {
                        this.bloodSelect+
                         "/" +
                        this.tel+
-                       "/"+this.address+"/"+
+                       "/"+this.address+
+                       "/"+
                        this.matSelect
 
                     )
@@ -178,7 +179,9 @@ data() {
                       console.log(e);
                     });
                     //console.log(this.departSelect,this.name,this.age,this.bloodSelect,this.genSelect,this.tel,this.address,this.matSelect);
-            alert("บันทึกข้อมูลสำเร็จ");
+                alert("บันทึกข้อมูลสำเร็จ");
+                window.location.reload()
+            }
         }
        
        

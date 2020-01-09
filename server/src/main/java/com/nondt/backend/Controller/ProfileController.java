@@ -75,6 +75,7 @@ public class ProfileController {
                 profile.setDepartment(department);
                 profile.setMaritalstatus(maritalstatus);
                 profile.setName(name);
+                profile.setPhone(tel);
                 profileRepository.save(profile);
     }
     
