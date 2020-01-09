@@ -13,7 +13,7 @@
     "mdbvue": "^5.8.3",
     "vue": "^2.6.10",
     "vue-material": "^1.0.0-beta-11",
-    "vuetify": "^2.0.0"
+    "vuetify": "^2.2.3"
   },
   "devDependencies": {
     "@tygr/vue-time-picker": "^1.0.9",

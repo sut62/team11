@@ -9,8 +9,8 @@
   </v-app>
 </template>
 
+import Navigation from './components/Navigation'
 <script>
-
 
 export default {
   name: 'App',

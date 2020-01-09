@@ -1,5 +1,6 @@
 <template>
 <html>
+  <Navbar/>
 <br>
 <br>
 
@@ -79,8 +80,12 @@
 </html>
 </template>
 <script>
+import Navbar from '../components/Navbar'
 import http from "../http-common";
 export default {
+  components: {
+    Navbar
+  },
 data() {
     return {
       profiles: null,
