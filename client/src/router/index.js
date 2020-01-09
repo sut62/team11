@@ -5,6 +5,7 @@ import Vue from 'vue'
    import PatientManagement from '../components/PatientManagement';
    import Recipe from '../components/Recipe';
    import Schedule from '../components/Schedule';
+   import BookRoom from '../components/BookRoom';
    //import Index from '../components/Index';
    Vue.use(Router);
 
@@ -12,6 +13,7 @@ import Vue from 'vue'
        mode: 'history',
        base: process.env.BASE_URL,
        routes: [
+        {path: '/BookRoom',component: BookRoom},
        {path: '/profile',component: Profile},
        {path: '/appointment',component: Appointment},
        {path: '/patientmanagement',component: PatientManagement},

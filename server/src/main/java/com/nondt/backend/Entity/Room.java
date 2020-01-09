@@ -18,8 +18,8 @@ public class Room {
 	@Id
 	@SequenceGenerator(name = "Roomseq", sequenceName = "Roomseq")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Roomseq")
-	private   Long Room_id;
-	private   String name;
+	private   Long room_id;
+	private   String room;
 
 	public Room(){}
 }

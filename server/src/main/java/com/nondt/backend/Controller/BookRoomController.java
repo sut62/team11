@@ -52,9 +52,6 @@ public class BookRoomController {
         return bookRoomRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    
-
-
     @PostMapping("/Bookroom/{note}/{DateOfBook}/{TimeOfStart}/{TimeOfEnd}/{Roomid}/{ProfileId}/{PatientManagementId}")
     public BookRoom newBookroom(BookRoom newBookroom,
     @PathVariable String note,
@@ -66,8 +63,8 @@ public class BookRoomController {
     @PathVariable long PatientManagementId)
     throws ParseException {
     
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    SimpleDateFormat dateFormat2 = new SimpleDateFormat("HH-mm-ss");
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    SimpleDateFormat dateFormat2 = new SimpleDateFormat("HH:mm");
 
     Profile profile = profileRepository.findById(ProfileId);
     PatientManagement patientManagement = patientManagementRepository.findById(PatientManagementId).get();

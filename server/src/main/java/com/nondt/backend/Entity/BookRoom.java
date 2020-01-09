@@ -39,13 +39,13 @@ public class BookRoom {
     
     private @NonNull String note;
     
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private @NonNull Date DateOfBook;
     
-    @DateTimeFormat(pattern = "HH-mm-ss")
+    @DateTimeFormat(pattern = "HH:mm")
     private @NonNull Date TimeOfStart;
    
-    @DateTimeFormat(pattern = "HH-mm-ss")
+    @DateTimeFormat(pattern = "HH:mm")
     private @NonNull Date TimeOfEnd;
     
     
@@ -63,6 +63,6 @@ public class BookRoom {
 
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Room.class)
-    @JoinColumn(name = "Room_id", insertable = true)
+    @JoinColumn(name = "room_id", insertable = true)
     private Room room;
 }
