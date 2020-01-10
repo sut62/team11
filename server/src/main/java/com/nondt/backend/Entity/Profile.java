@@ -22,7 +22,7 @@ public class Profile {
     private String name;
     private int age;
     private String address;
-    private String phone;
+
 
     @ManyToOne
     private Gender gender;

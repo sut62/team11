@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 public class ScheduleController {
 
     @Autowired
-    private final ScheduleRepository scheduleRepository;
+    private ScheduleRepository scheduleRepository;
     @Autowired
     private DepartmentRepository departmentRepository;
     @Autowired
