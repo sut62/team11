@@ -1,27 +1,20 @@
 <template>
 <html>
-  <Navbar/>
 
 <md-tabs class="md-primary" md-alignment="centered">
      
-      <md-tab id="tab-pages" md-label="ข้อมูลคนไข้" ></md-tab>
+      <md-tab id="tab-pages" md-label="ข้อมูลของคนไข้" ></md-tab>
    
 </md-tabs>
-
-<br>
-
-<br>
+<body background="doc1.jpg">
   <center>
     <div>
- 
-      <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
+    <br>
+    <br>
+    <br>
+      <md-card>
       <div class="md-layout-item">
+        <label>แพทย์</label>
       <md-field>
           <label>แพทย์ผู้ตรวจ</label>
           <md-select v-model="profileSelect">
@@ -63,7 +56,7 @@
 
       <md-field>
         <label>อายุ</label>
-        <md-input  v-model="age"></md-input>
+        <md-input  v-model="age" type="number"></md-input>
       </md-field>
 
       <md-field>
@@ -80,20 +73,16 @@
         </center>
 
 
-
+</md-card>
     </div>
 
 </center>
-
+</body>
 </html>
 </template>
 <script>
-import Navbar from '../components/Navbar'
 import http from "../http-common";
 export default {
-   components: {
-    Navbar
-  },
 data() {
     return {
       profiles: null,
@@ -196,6 +185,11 @@ data() {
 .md-field{
   max-width: 400px;
 }
-
+.md-card{
+  
+  width: 500px;
+    height: 700px;
+  background-color: white;
+}
 
 </style>
