@@ -1,16 +1,9 @@
-<template>
+﻿<template>
 <html>
-
-<md-tabs class="md-primary" md-alignment="centered">
-     
-      <md-tab id="tab-pages" md-label="ข้อมูลของคนไข้" ></md-tab>
-   
-</md-tabs>
+ <Navbar/>
 <body background="doc1.jpg">
   <center>
     <div>
-    <br>
-    <br>
     <br>
       <md-card>
       <div class="md-layout-item">
@@ -81,8 +74,12 @@
 </html>
 </template>
 <script>
+import Navbar from '../components/Navbar'
 import http from "../http-common";
 export default {
+   components: {
+    Navbar
+  },
 data() {
     return {
       profiles: null,
@@ -190,6 +187,9 @@ data() {
   width: 500px;
     height: 700px;
   background-color: white;
+}
+.body {
+  background-color: #E6E6FA;
 }
 
 </style>
