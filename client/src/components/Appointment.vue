@@ -1,8 +1,15 @@
 <template>
 <html>
   <Navbar/>
-<body>
-
+<body background="rr.jpg">
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<center>
     <md-field>
           <label>ชื่อแพทย์</label>
           <md-select v-model="profileSelect">
@@ -33,7 +40,7 @@
       <label>สาเหตุนัดหมาย</label>
       <md-input v-model ="remark"></md-input>
     </md-field><md-button class="md-raised" @click="savedata()">Save</md-button>
-
+</center>
 </body>
 </html>
 </template> 
@@ -111,7 +118,10 @@ data() {
 
     },
     savedata(){
-           http
+      if(this.profileSelect==null||this.patSelect==null|| this.dateSelect==null||this.timeappointmentSelect==null||this.remark==null ){
+            alert("บันทึกข้อมูลไม่สำเร็จ กรุณากรอกข้อมูลให้ครบ");
+      }
+           else{ http
                     .post(
                       "/appointment/" +
                         this.profileSelect +
@@ -133,7 +143,7 @@ data() {
                     });
         console.log(this.profileSelect,this.patSelect,this.dateSelect,this.timeappointmentSelect,this.remark);
             alert("บันทึกข้อมูลสำเร็จ");
-        
+           }
     }
   },
 
