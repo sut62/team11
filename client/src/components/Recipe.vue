@@ -1,16 +1,23 @@
 <template>
 <html>
   <Navbar/>
-<body background="w.jpg">
+<body style="background-color:powderblue;">
 <br>
 <br>
-<br>
-<center>
-<br>
-<br>
+
+
 <br>
 <br>
-<br>
+  <center>
+    
+    <md-card class="md-" md-with-hover>
+        <md-card-header>
+          <div class="md-title">สั่งจ่ายยาของแพทย์</div>
+        </md-card-header>
+        <md-card-content>
+          
+    <div>
+
     <md-field>
       <label>เลขที่จ่ายยา</label>
       <md-input v-model="nummed"></md-input>
@@ -51,12 +58,16 @@
           <md-select v-model="patSelect">
                  <md-option v-for="pat in pats" :key="pat.patientManage_id" :value="pat.patientManage_id">{{pat.patient.name}} </md-option>
           </md-select>
+          
     </md-field>
-  
+    <md-button class="md-raised md-primary" @click="savedata()">บันทึกข้อมูล</md-button>
     <br/>
-    <md-button class="md-raised" @click="savedata()">บันทึกข้อมูล</md-button>
+    
     <br>
-        
+
+    </div>
+      </md-card-content>
+    </md-card>
 
 
 </center>
@@ -139,6 +150,7 @@ data() {
           },
 
        savedata(){
+
            http
                     .post(
                       "/recipe/" +
@@ -158,12 +170,17 @@ data() {
                     )
                     .then(response => {
                       console.log(response);
+                       alert("บันทึกข้อมูลสำเร็จ");
+                       window.location.reload()
                     })
                     .catch(e => {
+                      alert("บันทึกข้อมูลไม่สำเร็จ กรุณากรอกข้อมูลให้ครบ");
                       console.log(e);
                     });
         
-            alert("บันทึกข้อมูลสำเร็จ");
+           
+            
+
          // console.log(this.nummed , this.medicineSelect , this.typeSelect , this.amount , this.selectedDate,
          // this.profileSelect , this.patSelect);
        },
@@ -180,15 +197,14 @@ data() {
 </script>
 
 
-
-
-
-
-
-
-
 <style>
 .md-field{
   max-width: 400px;
 }
+.md-card {
+    width: 580px;
+    margin: 10px;
+    display: inline-block;
+    vertical-align: top;
+  }
 </style>
