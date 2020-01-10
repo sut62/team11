@@ -36,7 +36,7 @@ public class SpringBootRestapiH2DatabaseApplication {
                 departmentRepository.save(department);
             });
 
-            Stream.of( "โสด","สมรส").forEach(maritalstatuss -> {
+            Stream.of( "โสด","สมรส", "หย่าร้าง").forEach(maritalstatuss -> {
                 Maritalstatus maritalstatus = new Maritalstatus();
                 maritalstatus.setStatus(maritalstatuss);
                 maritalstatusRepository.save(maritalstatus);
@@ -71,6 +71,23 @@ public class SpringBootRestapiH2DatabaseApplication {
                 worktime.setWork(worktime1);
                 worktimeRepository.save(worktime);
             });
+
+            Department department = departmentRepository.findById(1);
+            Gender gender = genderRepository.findById(1);
+            Blood blood = bloodRepository.findById(1);
+            Maritalstatus maritalstatus = maritalstatusRepository.findById(1);
+            Profile profile = new Profile();
+            profile.setName("Suwanun Pe");
+            profile.setPhone("0900000000");
+            profile.setAge(40);
+            profile.setAddress("Suranaree");
+            profile.setBlood(blood);
+            profile.setGender(gender);
+            profile.setDepartment(department);
+            profile.setMaritalstatus(maritalstatus);
+            profileRepository.save(profile);
+
+
         };
     }
 }
