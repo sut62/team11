@@ -1,14 +1,17 @@
 <template>
 <html>
   <Navbar/>
- <body > 
+ <body class = "body" > 
     
 <br>
 <br>
 <br>
-<br>
-<br>
+
 <center>
+  <body class = "card">
+    <center>
+      <br>
+<br>
 <h1>ตารางเวร</h1>
 <br>
 <br>
@@ -29,11 +32,15 @@
           </md-select>
         </md-field>
 
-        <div>
-            <md-datepicker v-model="selectedDate">
-              <label>เลือกวันที่</label>
-            </md-datepicker>
-          </div>
+        
+          <div >
+        <md-field>
+       
+        <label>วันที่(YYYY-MM-DD)</label>
+        <md-input v-model="selectedDate"></md-input>
+      </md-field>
+      
+      </div>
 
         
     <md-field>
@@ -45,9 +52,12 @@
 
    
 
-    <md-button class="md-raised md-primary" @click="savedata()">บันทึกข้อมูล</md-button>     
-
-
+    <md-button class="md-raised md-primary" @click="savedata()">บันทึกข้อมูล</md-button>   
+    
+    <br>
+<br>  
+</center>
+</body>
   </center>
  </body>
 </html>
@@ -136,7 +146,8 @@ data() {
                       console.log(e);
                     });
         
-            alert("บันทึกข้อมูลสำเร็จ"); }
+            alert("บันทึกข้อมูลสำเร็จ"); 
+            location.reload();}
 
     },
        
@@ -153,8 +164,14 @@ data() {
 </script>
 
 <style>
+.card {
+    width: 50%;
+    height: 50%;
+    
+     background-color: white;
+  }
 
-  body {
-  background-color: lightblue;
+  .body {
+  background-color: #293214;
 }
 </style>
