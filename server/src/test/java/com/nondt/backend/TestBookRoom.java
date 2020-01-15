@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 @DataJpaTest
-public class CustomerTest{
+public class TestBookRoom{
     private Validator validator;
         
     @Autowired
@@ -36,12 +36,12 @@ public class CustomerTest{
     void testBookRoomOKFullData(){
         BookRoom bookRoom = new BookRoom();
         BookRoom.setnote("Test");
-        customer.setDateOfBook("15-01-2020");
-        customer.setTimeOfStart("11:19");
-        customer.setTimeOfEnd("11:20");
+        BookRoom.setDateOfBook("15-01-2020");
+        BookRoom.setTimeOfStart("11:19");
+        BookRoom.setTimeOfEnd("11:20");
 
         bookRoom = bookRoomRepository.saveAndFlush(bookRoom);
-        Optional<BookRoom> found = bookRoomRepository.findById(bookRoom.getId());
+        Optional<BookRoom> found = bookRoomRepository.findById(bookRoom);
         assertEquals("Test", found.get().getnote());
         assertEquals("15-01-2020", found.get().getDateOfBook());
         assertEquals("11:19", found.get().getTimeOfStart());
