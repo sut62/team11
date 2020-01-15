@@ -35,7 +35,7 @@ public class CustomerTest{
     @Test
     void testBookRoomOKFullData(){
         BookRoom bookRoom = new BookRoom();
-        BookRoom.setnote("Test")
+        BookRoom.setnote("Test");
         customer.setDateOfBook("15-01-2020");
         customer.setTimeOfStart("11:19");
         customer.setTimeOfEnd("11:20");
@@ -46,6 +46,6 @@ public class CustomerTest{
         assertEquals("15-01-2020", found.get().getDateOfBook());
         assertEquals("11:19", found.get().getTimeOfStart());
         assertEquals("11:20", found.get().getTimeOfEnd());
-        
+
     } 
 }
