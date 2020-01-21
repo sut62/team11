@@ -13,6 +13,7 @@
       <br>
 <br>
 <h1>ตารางเวร</h1>
+
 <br>
 <br>
 
@@ -33,14 +34,33 @@
         </md-field>
 
         
-          <div >
-        <md-field>
-       
-        <label>วันที่(YYYY-MM-DD)</label>
-        <md-input v-model="selectedDate"></md-input>
-      </md-field>
-      
-      </div>
+        
+  
+
+  <v-col cols="12" lg="6">
+        <v-menu
+          v-model="menu2"
+          :close-on-content-click="false"
+          transition="scale-transition"
+          offset-y
+          full-width
+          max-width="290px"
+          min-width="290px"
+        >
+          <template v-slot:activator="{ on }">
+            <v-text-field
+              v-model="selectedDate"
+              label="วันที่"
+             
+              prepend-icon="event"
+              readonly
+              v-on="on"
+            ></v-text-field>
+          </template>
+          <v-date-picker v-model="selectedDate" no-title @input="menu2 = false"></v-date-picker>
+        </v-menu>
+        
+      </v-col>
 
         
     <md-field>
@@ -70,7 +90,9 @@ import http from "../http-common";
 export default {
    components: {
     Navbar
+    
   },
+  
 data() {
     return {
       profiles:null,
@@ -78,8 +100,8 @@ data() {
       worktimes: null,
       profileSelect: null,
       departSelect: null,
-      selectedDate: null,
       timeSelect: null,
+      selectedDate: null
     };
   },
   methods: {
@@ -147,7 +169,8 @@ data() {
                     });
         
             alert("บันทึกข้อมูลสำเร็จ"); 
-            location.reload();}
+            //location.reload();
+            }
 
     },
        
