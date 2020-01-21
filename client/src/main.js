@@ -10,6 +10,10 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbvue/build/css/mdb.css';
 import vuetify from './plugins/vuetify';
 
+import VueSimpleAlert from "vue-simple-alert";
+
+Vue.use(VueSimpleAlert);
+
 Vue.use(VueMaterial)
 
 new Vue({
