@@ -163,15 +163,17 @@ data() {
                                                 "Success",
                                                 "success"
                                           ).then(() => console.log("Closed"));
+                                          window.location.reload();
 
                     })
                     .catch(e => {
                       console.log(e);
                         this.$alert(
-                           "กรอกข้อมูลไม่ครบ",
+                           "บันทึกข้อมูลไม่สำเร็จ",
                            "Warning",
                            "warning"
                         ).then(() => console.log("Closed"));
+                        window.location.reload();
                     });
         console.log(this.profileSelect,this.departSelect,this.title,this.name,this.genSelect,this.age,this.pati,this.dateSelect);
 
