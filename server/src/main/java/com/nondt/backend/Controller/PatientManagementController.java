@@ -30,10 +30,7 @@ public class PatientManagementController {
     private DepartmentRepository departmentRepository;
 
 
-    @GetMapping("/patient")
-    public Collection<Patient> patients() {
-        return patientRepository.findAll().stream().collect(Collectors.toList());
-    }
+ 
 
     @GetMapping("/patientmanage")
     public Collection<PatientManagement> patientmanages() {

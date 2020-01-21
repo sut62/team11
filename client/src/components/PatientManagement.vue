@@ -158,12 +158,23 @@ data() {
                     )
                     .then(response => {
                       console.log(response);
+                      this.$alert(
+                                                "บันทึกข้อมูลสำเร็จ",
+                                                "Success",
+                                                "success"
+                                          ).then(() => console.log("Closed"));
+
                     })
                     .catch(e => {
                       console.log(e);
+                        this.$alert(
+                           "กรอกข้อมูลไม่ครบ",
+                           "Warning",
+                           "warning"
+                        ).then(() => console.log("Closed"));
                     });
         console.log(this.profileSelect,this.departSelect,this.title,this.name,this.genSelect,this.age,this.pati,this.dateSelect);
-            alert("บันทึกข้อมูลสำเร็จ");
+
         }
 
       

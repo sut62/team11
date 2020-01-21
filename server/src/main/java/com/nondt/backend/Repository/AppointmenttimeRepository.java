@@ -8,6 +8,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
 public interface AppointmenttimeRepository extends JpaRepository<Appointmenttime, Long> {
-    
+    Appointmenttime findById(long appointmenttime_id);
 
 }
