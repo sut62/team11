@@ -42,8 +42,8 @@ public class AppointmentController {
                   {
 
                 Profile profile = profileRepository.findById(profileSelect);
-                Patient patient = patientRepository.findById(patSelect).get();
-                Appointmenttime appointmenttime = appointmenttimeRepository.findById(timeappointmentSelect).get();
+                Patient patient = patientRepository.findById(patSelect);
+                Appointmenttime appointmenttime = appointmenttimeRepository.findById(timeappointmentSelect);
                 Appointment appointment = new Appointment();
                 appointment.setCause(remark);
                 appointment.setPatient(patient);

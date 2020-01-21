@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -25,6 +27,9 @@ public class Appointment{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "appo_seq")
     private long appointment_id;
 
+
+    @NotNull
+    @Pattern(regexp = "\\w{3,100}")
     private String cause;
 
 
@@ -47,4 +52,59 @@ public class Appointment{
     
     public Appointment(){}
 
+    public long getAppointment_id() {
+        return appointment_id;
+    }
+
+    public void setAppointment_id(long appointment_id) {
+        this.appointment_id = appointment_id;
+    }
+
+    public String getCause() {
+        return cause;
+    }
+
+    public void setCause(String cause) {
+        this.cause = cause;
+    }
+
+    public LocalDate getDatetoday() {
+        return datetoday;
+    }
+
+    public void setDatetoday(LocalDate datetoday) {
+        this.datetoday = datetoday;
+    }
+
+    public LocalDate getDateap() {
+        return dateap;
+    }
+
+    public void setDateap(LocalDate dateap) {
+        this.dateap = dateap;
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public Appointmenttime getAppointmenttime() {
+        return appointmenttime;
+    }
+
+    public void setAppointmenttime(Appointmenttime appointmenttime) {
+        this.appointmenttime = appointmenttime;
+    }
 }

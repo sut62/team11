@@ -67,7 +67,7 @@ public class BookRoomController {
     SimpleDateFormat dateFormat2 = new SimpleDateFormat("HH:mm");
 
     Profile profile = profileRepository.findById(ProfileId);
-    PatientManagement patientManagement = patientManagementRepository.findById(PatientManagementId).get();
+    PatientManagement patientManagement = patientManagementRepository.findById(PatientManagementId);
     Room room = roomRepository.findById(Roomid);
     
     newBookroom.setNote(note);

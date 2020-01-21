@@ -52,7 +52,7 @@ public class RecipeController {
                     Medicine medicine = medicineRepository.findById(medicineSelect);
                     Typemedicine typemedicine = typemedicineRepository.findById(typeSelect);
                     Profile profile = profileRepository.findById(profileSelect);
-                    PatientManagement patientManagement = patientManagementRepository.findById(patSelect).get();
+                    PatientManagement patientManagement = patientManagementRepository.findById(patSelect);
                     recipe.setNumber(nummed);
                     recipe.setAmount(amount);
                     String[] b = selectDate.split(" ");
