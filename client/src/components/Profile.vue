@@ -10,58 +10,58 @@
 <br>   
 <br> 
  <md-field>
-          <label >แผนก</label>
-          <md-select v-model="departSelect">
-                 <md-option v-for="department in departments" :key="department.department_id" :value="department.department_id">{{department.department}} </md-option>
+  <label id="dee">แผนก</label> 
+          <md-select id="de" class="de" v-model="departSelect">
+              <md-option v-for="department in departments"  :key="department.department_id" :value="department.department_id">{{department.department}} </md-option>
           </md-select>
         </md-field>
 
         <md-field>
       <label>ชื่อ</label>
-      <md-input v-model="name"></md-input>
+      <md-input id="name" type="text" class="Name" v-model="name"></md-input>
     </md-field>
 
     <md-field>
       <label>อายุ</label>
-      <md-input v-model="age" type="number"></md-input>
+      <md-input class="Age" id="age" v-model="age" type="number"></md-input>
     </md-field>
   
   <md-field>
           <label>กรุ๊ปเลือด</label>
-          <md-select v-model="bloodSelect">
+          <md-select class="Blood" id="blood" v-model="bloodSelect">
                 <md-option v-for="blood in bloods" :key="blood.blood_id" :value="blood.blood_id">{{blood.blood}} </md-option>
           </md-select>
   </md-field>
 
   <md-field>
           <label>เพศ</label>
-          <md-select v-model="genSelect">
+          <md-select class="Gender" id="gender" v-model="genSelect">
                 <md-option v-for="gender in genders" :key="gender.gender_id" :value="gender.gender_id">{{gender.gender}} </md-option>
           </md-select>
   </md-field>
 
   <md-field>
           <label>สถานภาพ</label>
-          <md-select v-model="matSelect">
+          <md-select class="Status" id="status" v-model="matSelect">
                 <md-option v-for="mat in mats" :key="mat.status_id" :value="mat.status_id">{{mat.status}} </md-option>
           </md-select>
   </md-field>
     
     <md-field>
       <label>เบอร์</label>
-      <md-input v-model="tel" type="number" md-counter="10"></md-input>
+      <md-input class="Phone"  id="phone" v-model="tel" type="number" md-counter="10"></md-input>
     </md-field>
 
 
     <md-field>
       <label>ที่อยู่</label>
-      <md-textarea v-model="address" md-counter="80"></md-textarea>
+      <md-textarea class="Address" id="address" v-model="address" md-counter="80"></md-textarea>
     </md-field>
 
 
-    <br/>
-    <md-button class="md-raised md-primary" @click="savedata()">บันทึกข้อมูล</md-button>
-        <br>
+  
+    <md-button class="md-primary md-raised" @click="savedata()">SAVE</md-button>
+  <md-button class="md-raised" @click="clear()">CLEAR</md-button>
 
 
 </center>
@@ -150,7 +150,11 @@ data() {
 
         savedata(){
                 if(this.departSelect==null||this.name==null||this.genSelect==null||this.age==null||this.bloodSelect==null||this.tel==null||this.address==null||this.matSelect==null ){
-                      alert("บันทึกข้อมูลไม่สำเร็จ กรุณากรอกข้อมูลให้ครบ");
+                       this.$alert(
+                           "กรอกข้อมูลไม่ครบ",
+                           "Warning",
+                           "warning"
+                        ).then(() => console.log("Closed"));
                     }
                else
           { http
@@ -179,10 +183,19 @@ data() {
                       console.log(e);
                     });
                     //console.log(this.departSelect,this.name,this.age,this.bloodSelect,this.genSelect,this.tel,this.address,this.matSelect);
-                alert("บันทึกข้อมูลสำเร็จ");
+                 this.$alert(
+                          "บันทึกข้อมูลสำเร็จ",
+                          "Success",
+                          "success"
+                    ).then(() => console.log("Closed"));
+
                 window.location.reload()
             }
+        },
+        clear() {
+           window.location.reload()
         }
+
        
        
   },
@@ -195,13 +208,6 @@ data() {
 }
 
 </script>
-
-
-
-
-
-
-
 
 
 <style>
