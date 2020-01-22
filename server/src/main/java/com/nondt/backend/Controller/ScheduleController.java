@@ -14,12 +14,15 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+
+
+
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
 public class ScheduleController {
 
     @Autowired
-    private ScheduleRepository scheduleRepository;
+    private final ScheduleRepository scheduleRepository;
     @Autowired
     private DepartmentRepository departmentRepository;
     @Autowired
@@ -36,11 +39,14 @@ public class ScheduleController {
         return scheduleRepository.findAll().stream().collect(Collectors.toList());
     }
 
+   
+
     @PostMapping("/schedule/{profileSelect}/{departSelect}/{selectedDate}/{timeSelect}")
     public Schedule newschedule(Schedule newschedule,
             @PathVariable long profileSelect,
             @PathVariable long departSelect,
             @PathVariable String selectedDate,
+            
             @PathVariable long timeSelect) {
 
         Profile profile = profileRepository.findById(profileSelect);
@@ -48,11 +54,12 @@ public class ScheduleController {
         Worktime worktime = worktimeRepository.findById(timeSelect);
         
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate scheduledate = LocalDate.parse(selectedDate, formatter);
+        LocalDate ScheduleDate = LocalDate.parse(selectedDate, formatter);
+
 
         newschedule.setProfile_id(profile);
         newschedule.setDepartment_id(department);
-        newschedule.setScheduledate(scheduledate);
+        newschedule.setScheduleDate(ScheduleDate);
         newschedule.setWorktime(worktime);
 
         return scheduleRepository.saveAndFlush(newschedule);
