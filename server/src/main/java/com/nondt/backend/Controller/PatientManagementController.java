@@ -75,7 +75,7 @@ public class PatientManagementController {
 
             LocalDate localDate = LocalDate.of(year,month,day);
                 patientManagement.setPatientDate(localDate);
-                patientManagementRepository.save(patientManagement);
+                patientManagementRepository.saveAndFlush(patientManagement);
     }
 
 }
