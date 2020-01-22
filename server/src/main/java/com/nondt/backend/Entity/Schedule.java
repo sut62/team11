@@ -4,18 +4,19 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import lombok.*;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Pattern;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
 import java.time.LocalDate;
-import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,19 +36,22 @@ public class Schedule {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="schedule_SEQ")
     @Column(name="SCHEDULE_Id",unique = true, nullable = true)
     private @NonNull Long scheduleId;
+   
 
-
-    private @NonNull LocalDate scheduledate;
+   @FutureOrPresent
+   @NotNull
+   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private   LocalDate ScheduleDate;
+    
     
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Profile.class)
-    @JoinColumn(name = "ProfileId", unique = true, nullable = true)
+    @JoinColumn(name = "ProfileId", insertable = true)
     private @NonNull Profile profile_id;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Department.class)
-    @JoinColumn(name = "DepartmentID", nullable = true)
+    @JoinColumn(name = "DepartmentID", insertable = true)
     private @NonNull Department department_id;
     
-
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Worktime.class)
     @JoinColumn(name="WORKTIME", insertable = true)
     private Worktime worktime;
