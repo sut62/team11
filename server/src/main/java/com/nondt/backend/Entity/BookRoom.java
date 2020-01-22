@@ -1,6 +1,5 @@
 package com.nondt.backend.Entity;
 
-
 import lombok.*;
 
 import javax.persistence.Id;
@@ -8,12 +7,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotNull;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
-
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -34,19 +34,24 @@ public class BookRoom {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="BookRoom_seq")
     @Column(name = "ID_BookRoom", unique = true, nullable = true)
 
+    
     private @NonNull Long id;
 
+    @NotNull
+    private String note;
     
-    private @NonNull String note;
+    @FutureOrPresent
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate DateOfBook;
     
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private @NonNull Date DateOfBook;
-    
+    @NotNull
     @DateTimeFormat(pattern = "HH:mm")
-    private @NonNull Date TimeOfStart;
+    private LocalTime TimeOfStart;
    
+    @NotNull
     @DateTimeFormat(pattern = "HH:mm")
-    private @NonNull Date TimeOfEnd;
+    private LocalTime TimeOfEnd;
     
     
     @Column(name="BookDate ")
