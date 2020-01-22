@@ -23,11 +23,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.net.URLDecoder;
 import java.text.ParseException;
-import java.text.SimpleDateFormat; 
-
-  
-
-
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -63,22 +62,25 @@ public class BookRoomController {
     @PathVariable long PatientManagementId)
     throws ParseException {
     
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-    SimpleDateFormat dateFormat2 = new SimpleDateFormat("HH:mm");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    LocalDate dateOfBook = LocalDate.parse(DateOfBook, formatter);
+    DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm");
+    LocalTime timeOfStart = LocalTime.parse(TimeOfStart, formatter2);
+    LocalTime timeOfEnd = LocalTime.parse(TimeOfEnd, formatter2);
+    
 
     Profile profile = profileRepository.findById(ProfileId);
     PatientManagement patientManagement = patientManagementRepository.findById(PatientManagementId);
     Room room = roomRepository.findById(Roomid);
     
     newBookroom.setNote(note);
-    newBookroom.setDateOfBook(dateFormat.parse(DateOfBook));
-    newBookroom.setTimeOfStart(dateFormat2.parse(TimeOfStart));
-    newBookroom.setTimeOfEnd(dateFormat2.parse(TimeOfEnd));
+    newBookroom.setDateOfBook(dateOfBook);
+    newBookroom.setTimeOfStart(timeOfStart);
+    newBookroom.setTimeOfEnd(timeOfEnd);
     newBookroom.setProfile(profile);
     newBookroom.setPatientManagement(patientManagement);
     newBookroom.setRoom(room);
     newBookroom.setBookDate(new Date());
-    
 
     return bookRoomRepository.save(newBookroom); //บันทึก Objcet ชื่อ VideoRental
     
