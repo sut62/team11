@@ -56,7 +56,7 @@ public class RecipeTest{
     }
 
     @Test
-    void B5700820_testRecipeNotNull() {
+    void B5700820_testRecipeNotNull() { //Notnull
         Recipe recipe = new Recipe();
 
         recipe.setNumber(null);
