@@ -9,6 +9,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
@@ -38,6 +39,7 @@ public class BookRoom {
     private @NonNull Long id;
 
     @NotNull
+    @Size(min = 10, max = 500)
     private String note;
     
     @FutureOrPresent
