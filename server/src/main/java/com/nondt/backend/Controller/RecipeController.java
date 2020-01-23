@@ -1,6 +1,5 @@
 package com.nondt.backend.Controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
-
+import java.time.format.DateTimeFormatter;
 
 import com.nondt.backend.Entity.*;
 import com.nondt.backend.Repository.*;
@@ -41,16 +40,17 @@ public class RecipeController {
 
 
 
-    @PostMapping("/recipe/{nummed}/{medicineSelect}/{typeSelect}/{amount}/{selectDate}/{profileSelect}/{patSelect}/{typepackingSelect}")
+    @PostMapping("/recipe/{nummed}/{medicineSelect}/{typeSelect}/{amount}/{typepackingSelect}/{selectDate}/{profileSelect}/{patSelect}")
     public void newRecipe(
                         @PathVariable long nummed,
                         @PathVariable long medicineSelect,
                         @PathVariable long typeSelect,
                         @PathVariable long amount,
+                        @PathVariable long typepackingSelect,
                         @PathVariable String selectDate,
                         @PathVariable long profileSelect,
-                        @PathVariable long patSelect,
-                        @PathVariable long typepackingSelect) 
+                        @PathVariable long patSelect
+                        ) 
                   {
                     Recipe recipe = new Recipe();
                     Medicine medicine = medicineRepository.findById(medicineSelect);
@@ -60,22 +60,12 @@ public class RecipeController {
                     Typepacking typepacking = typepackingRepository.findById(typepackingSelect);
                     recipe.setNumber(nummed);
                     recipe.setAmount(amount);
-                    String[] b = selectDate.split(" ");
-            int year = Integer.valueOf(b[3]);
+                
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    LocalDate recipeDate = LocalDate.parse(selectDate, formatter);
 
-            int day = Integer.valueOf(b[2]);
-            int month = 1 ;
-
-            if(b[1].equalsIgnoreCase("Jan")){ month = 1;}else if(b[1].equalsIgnoreCase("Feb")){ month = 2;}
-            else if(b[1].equalsIgnoreCase("Mar")){ month = 3;}else if(b[1].equalsIgnoreCase("Mar")){ month = 4;}
-            else if(b[1].equalsIgnoreCase("May")){ month = 5;}else if(b[1].equalsIgnoreCase("Jun")){ month = 6;}
-            else if(b[1].equalsIgnoreCase("Jul")){ month = 7;}else if(b[1].equalsIgnoreCase("Aug")){ month = 8;}
-            else if(b[1].equalsIgnoreCase("Sep")){ month = 9;}else if(b[1].equalsIgnoreCase("Oct")){ month = 10;}
-            else if(b[1].equalsIgnoreCase("Nov")){ month = 11;}else if(b[1].equalsIgnoreCase("Dec")){ month = 12;}
-
-
-            LocalDate localDate = LocalDate.of(year,month,day);
-            recipe.setDate(localDate);
+            
+            recipe.setDate(recipeDate);
             recipe.setMedicine(medicine);
             recipe.setPatientManagement(patientManagement);
             recipe.setProfile(profile);
