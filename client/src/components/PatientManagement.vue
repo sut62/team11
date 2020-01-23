@@ -10,7 +10,7 @@
         <label>แพทย์</label>
       <md-field>
           <label>แพทย์ผู้ตรวจ</label>
-          <md-select v-model="profileSelect">
+          <md-select id="doctor" class="Doctor" v-model="profileSelect">
                 <md-option v-for="profile in profiles" :key="profile.profile_id" :value="profile.profile_id">{{profile.name}} </md-option>
           </md-select>
   </md-field>
@@ -19,7 +19,7 @@
       <div class="md-layout-item">
       <md-field>
           <label >แผนก</label>
-          <md-select v-model="departSelect">
+          <md-select id="department" class="Department" v-model="departSelect">
                  <md-option v-for="department in departments" :key="department.department_id" :value="department.department_id">{{department.department}} </md-option>
           </md-select>
         </md-field>
@@ -29,19 +29,19 @@
       <label>ข้อมูลของคนไข้</label>
       <md-field>
         <label>คำนำหน้าชื่อ</label>
-        <md-input v-model="title"></md-input>
+        <md-input id="title" class="Title" v-model="title"></md-input>
       </md-field>
       </div>
 
       <md-field>
           <label>ชื่อ-นามสกุล</label>
-        <md-input  v-model="name"></md-input>
+        <md-input  id="name" class="Name" v-model="name"></md-input>
       </md-field>
 
       <div class="md-layout-item">
       <md-field>
           <label>เพศ</label>
-          <md-select v-model="genSelect">
+          <md-select id="gen" class="Gen" v-model="genSelect">
                 <md-option v-for="gender in genders" :key="gender.gender" :value="gender.gender">{{gender.gender}} </md-option>
           </md-select>
   </md-field>
@@ -49,15 +49,15 @@
 
       <md-field>
         <label>อายุ</label>
-        <md-input  v-model="age" type="number"></md-input>
+        <md-input id="age" class="Age" v-model="age" type="number"></md-input>
       </md-field>
 
       <md-field>
         <label>ผลตรวจ</label>
-        <md-input  v-model="pati"></md-input>
+        <md-input id="patient" class="Patient" v-model="pati"></md-input>
       </md-field>
 
-      <md-datepicker v-model="dateSelect">
+      <md-datepicker id="date" class="Date" v-model="dateSelect">
       <label>วันที่</label>
     </md-datepicker>
          <center>
@@ -159,11 +159,11 @@ data() {
                     .then(response => {
                       console.log(response);
                       this.$alert(
-                                                "บันทึกข้อมูลสำเร็จ",
-                                                "Success",
-                                                "success"
-                                          ).then(() => console.log("Closed"));
-                                          window.location.reload();
+                      "บันทึกข้อมูลสำเร็จ",
+                      "Success",
+                      "success"
+                      ).then(() => console.log("Closed"));
+
 
                     })
                     .catch(e => {
@@ -173,7 +173,7 @@ data() {
                            "Warning",
                            "warning"
                         ).then(() => console.log("Closed"));
-                        window.location.reload();
+
                     });
         console.log(this.profileSelect,this.departSelect,this.title,this.name,this.genSelect,this.age,this.pati,this.dateSelect);
 
