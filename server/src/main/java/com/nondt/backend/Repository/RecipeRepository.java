@@ -6,6 +6,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
-    Recipe findById(long Recipe_id);
+    Recipe findById(long id);
 
 }
