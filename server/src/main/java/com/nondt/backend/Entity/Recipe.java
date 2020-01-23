@@ -4,6 +4,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -27,9 +31,17 @@ import lombok.Setter;
 public class Recipe {
 
     @Id
+    @NotNull
     private  Long number;
+    
+    @Max(100)
+    @Min(1)
+    @NotNull
     private   Long amount;
 
+
+    @FutureOrPresent
+    @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate date;
     
@@ -41,7 +53,6 @@ public class Recipe {
     private Medicine medicine;
     @ManyToOne
     private Typemedicine typemedicine;
-    
     @ManyToOne
     private Typepacking typepacking;
 
