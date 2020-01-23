@@ -49,7 +49,7 @@ public class BookRoomTests{
     @Test
     void B6012755_testBookRoomOKFullData(){
         BookRoom bookRoom = new BookRoom();
-        bookRoom.setNote("Test");
+        bookRoom.setNote("Test1Test1");
         bookRoom.setDateOfBook(dateOfBook);
         bookRoom.setTimeOfStart(timeOfStart);
         bookRoom.setTimeOfEnd(timeOfEnd);
@@ -58,7 +58,7 @@ public class BookRoomTests{
 
         bookRoom = bookRoomRepository.saveAndFlush(bookRoom);
         Optional<BookRoom> found = bookRoomRepository.findById(bookRoom.getId());
-        assertEquals("Test", found.get().getNote());
+        assertEquals("Test1Test1", found.get().getNote());
         assertEquals(dateOfBook, found.get().getDateOfBook());
         assertEquals(timeOfStart, found.get().getTimeOfStart());
         assertEquals(timeOfEnd, found.get().getTimeOfEnd());
@@ -92,7 +92,7 @@ public class BookRoomTests{
     
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         final LocalDate DateofBook = LocalDate.parse("2019-01-20",formatter);
-        bookRoom.setNote("Test");
+        bookRoom.setNote("Test1Test1");
         bookRoom.setDateOfBook(DateofBook);
         bookRoom.setTimeOfStart(timeOfStart);
         bookRoom.setTimeOfEnd(timeOfEnd);
@@ -107,4 +107,50 @@ public class BookRoomTests{
         assertEquals("must be a date in the present or in the future", v.getMessage());
         assertEquals("DateOfBook", v.getPropertyPath().toString());
     }
+
+
+    @Test
+    void B6012755_testNoteNotBeMaxSize() { // ใส่ข้อมูลปกติ
+
+        BookRoom bookRoom = new BookRoom();
+        bookRoom.setNote("0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789");
+        bookRoom.setDateOfBook(dateOfBook);
+        bookRoom.setTimeOfStart(timeOfStart);
+        bookRoom.setTimeOfEnd(timeOfEnd);
+        bookRoom.setBookDate(bookDate);
+
+        Set<ConstraintViolation<BookRoom>> result = validator.validate(bookRoom);
+
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
+
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<BookRoom> error = result.iterator().next();
+        assertEquals("size must be between 10 and 500", error.getMessage());
+        assertEquals("note", error.getPropertyPath().toString());
+    }
+
+    @Test
+    void B6012755_testNoteNotBeMinSize() { // ใส่ข้อมูลปกติ
+
+        BookRoom bookRoom = new BookRoom();
+        bookRoom.setNote("test");
+        bookRoom.setDateOfBook(dateOfBook);
+        bookRoom.setTimeOfStart(timeOfStart);
+        bookRoom.setTimeOfEnd(timeOfEnd);
+        bookRoom.setBookDate(bookDate);
+
+        Set<ConstraintViolation<BookRoom>> result = validator.validate(bookRoom);
+
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
+
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<BookRoom> error = result.iterator().next();
+        assertEquals("size must be between 10 and 500", error.getMessage());
+        assertEquals("note", error.getPropertyPath().toString());
+    }
+
+
+
 }
