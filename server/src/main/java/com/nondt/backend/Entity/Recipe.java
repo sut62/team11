@@ -14,10 +14,12 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-
+@Data
 @Entity
 @Getter
 @Setter
@@ -26,7 +28,7 @@ public class Recipe {
 
     @Id
     private  Long number;
-    private  String amount;
+    private   Long amount;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate date;
@@ -39,6 +41,10 @@ public class Recipe {
     private Medicine medicine;
     @ManyToOne
     private Typemedicine typemedicine;
+    
+    @ManyToOne
+    private Typepacking typepacking;
+
     public Recipe(){}
         
 
