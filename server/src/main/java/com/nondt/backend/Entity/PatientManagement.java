@@ -54,52 +54,6 @@ public class PatientManagement {
     
     public PatientManagement(){}
 
-    public long getPatientManage_id() {
-        return patientManage_id;
-    }
-
-    public void setPatientManage_id(long patientManage_id) {
-        this.patientManage_id = patientManage_id;
-    }
-
-    public String getPatientManage() {
-        return patientManage;
-    }
-
-    public void setPatientManage(String patientManage) {
-        this.patientManage = patientManage;
-    }
-
-    public LocalDate getPatientDate() {
-        return patientDate;
-    }
-
-    public void setPatientDate(LocalDate patientDate) {
-        this.patientDate = patientDate;
-    }
-
-    public Profile getProfile() {
-        return profile;
-    }
-
-    public void setProfile(Profile profile) {
-        this.profile = profile;
-    }
-
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
-    }
-
-    public Department getDepartment() { return department; }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
-	
+    
    
 }
