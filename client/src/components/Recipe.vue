@@ -4,17 +4,15 @@
 <body style="background-color:powderblue;">
 <br>
 <br>
-
-
+<center>
+  <body class = "card">
+    <center>
 <br>
+<h1>สั่งจ่ายยาของแพทย์</h1>
 <br>
   <center>
     
-    <md-card class="md-" md-with-hover>
-        <md-card-header>
-          <div class="md-title">สั่งจ่ายยาของแพทย์</div>
-        </md-card-header>
-        <md-card-content>
+   
           
     <div>
 
@@ -42,9 +40,37 @@
       <md-input v-model="amount"></md-input>
     </md-field>
 
-    <md-datepicker v-model="selectedDate">
-      <label>วันที่สั่งจ่ายยา</label>
-    </md-datepicker>
+    <md-field>
+          <label >ประเภทบรรจุภัณฑ์</label>
+          <md-select v-model="typepackingSelect">
+              <md-option v-for="typepack in typepackings" :key="typepack.typepacking_id" :value="typepack.typepacking_id">{{typepack.typepacking_name}} </md-option>
+          </md-select>
+    </md-field>
+
+    
+    <v-col cols="12" lg="5">
+        <v-menu
+          v-model="menu2"
+          :close-on-content-click="false"
+          transition="scale-transition"
+          offset-y
+          full-width
+          max-width="290px"
+          min-width="290px"
+        >
+          <template v-slot:activator="{ on }">
+            <v-text-field
+              v-model="selectedDate"
+              label="วันที่"
+             
+              prepend-icon="event"
+              readonly
+              v-on="on"
+            ></v-text-field>
+          </template>
+          <v-date-picker v-model="selectedDate" no-title @input="menu2 = false"></v-date-picker>
+        </v-menu>
+      </v-col>
 
     <md-field>
           <label >ชื่อแพทย์สั่งจ่ายยา</label>
@@ -61,15 +87,16 @@
           
     </md-field>
     <md-button class="md-raised md-primary" @click="savedata()">บันทึกข้อมูล</md-button>
+
     <br/>
     
     <br>
 
     </div>
-      </md-card-content>
-    </md-card>
-
-
+      
+      </center>
+</center>
+</body>
 </center>
 </body>
 </html>
@@ -88,13 +115,15 @@ data() {
     medicineSelect : null,
     types: null,
     typeSelect: null,
+    typepackings: null,
+    typepackingSelect : null,
     nummed : null,
     amount: null,
     selectedDate: null,
     profiles: null,
     profileSelect: null,
-  patSelect: null,
-  pats : null,
+    patSelect: null,
+    pats : null,
 
     };
   },
@@ -119,6 +148,17 @@ data() {
         .get("/typemedicine")
         .then(response => {
           this.types = response.data;
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+          },
+          getTypepack() {
+      http
+        .get("/typepacking")
+        .then(response => {
+          this.typepackings = response.data;
           console.log(response.data);
         })
         .catch(e => {
@@ -162,10 +202,12 @@ data() {
                         "/" +
                         this.amount +
                         "/" +
-                       this.selectedDate+
+                        this.typepackingSelect +
                         "/" +
-                       this.profileSelect+
-                       "/"+this.patSelect
+                        this.selectedDate+
+                        "/" +
+                        this.profileSelect+
+                        "/"+this.patSelect
 
                     )
                     .then(response => {
@@ -191,6 +233,7 @@ data() {
       this.getType();
       this.getProfile();
       this.getPatient();
+      this.getTypepack();
   }
 }
 
@@ -198,13 +241,14 @@ data() {
 
 
 <style>
+
 .md-field{
   max-width: 400px;
 }
-.md-card {
-    width: 580px;
-    margin: 10px;
-    display: inline-block;
-    vertical-align: top;
+.card {
+    width: auto;
+    height: auto;
+    
+     background-color: white;
   }
 </style>
