@@ -19,7 +19,7 @@ public class SpringBootRestapiH2DatabaseApplication {
     @Bean
     ApplicationRunner init(BloodRepository bloodRepository , DepartmentRepository  departmentRepository, AppointmenttimeRepository appointmenttimeRepository
     , ProfileRepository profileRepository , GenderRepository genderRepository , MaritalstatusRepository maritalstatusRepository 
-    , MedicineRepository MedicineRepository , TypemedicineRepository typemedicineRepository,WorktimeRepository worktimeRepository) {
+    , MedicineRepository MedicineRepository , TypemedicineRepository typemedicineRepository,WorktimeRepository worktimeRepository, TypepackingRepository typepackingRepository) {
         return args -> {
 
 
@@ -54,16 +54,22 @@ public class SpringBootRestapiH2DatabaseApplication {
                 appointmenttimeRepository.save(appointmenttime);
             });
 
-            Stream.of( "ยาพารา","ยาแก้ปวด","ยาแก้ไข้").forEach(timeap -> {
+            Stream.of( "ยาพารา","ยาแก้ปวด","ยาแก้ไข้").forEach(medicines -> {
                 Medicine medicine = new Medicine();
-                medicine.setMedicine_name(timeap);
+                medicine.setMedicine_name(medicines);
                 MedicineRepository.save(medicine);
             });
 
-            Stream.of( "เม็ด","แคปซูล","น้ำ","ผง" ).forEach(timeap -> {
+            Stream.of( "เม็ด","แคปซูล","น้ำ","ผง" ).forEach(typemedicines -> {
                 Typemedicine typemedicine = new Typemedicine();
-                typemedicine.setTypemedicine_name(timeap);
+                typemedicine.setTypemedicine_name(typemedicines);
                 typemedicineRepository.save(typemedicine);
+            });
+
+            Stream.of( "กระปุก","แผง","ซอง","ขวด" ).forEach(typepackings -> {
+                Typepacking typepacking = new Typepacking();
+                typepacking.setTypepacking_name(typepackings);
+                typepackingRepository.save(typepacking);
             });
 
             Stream.of( "เช้า","บ่าย","ดึก" ).forEach(worktime1 -> {

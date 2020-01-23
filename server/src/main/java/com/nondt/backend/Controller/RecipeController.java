@@ -33,26 +33,31 @@ public class RecipeController {
     @Autowired
     private TypemedicineRepository typemedicineRepository;
     @Autowired
+    private TypepackingRepository typepackingRepository;
+    @Autowired
     private PatientManagementRepository patientManagementRepository;
+    
 
 
-    @PostMapping("/recipe/{nummed}/{medicineSelect}/{typeSelect}/{amount}/{selectDate}/{profileSelect}/{patSelect}")
+
+
+    @PostMapping("/recipe/{nummed}/{medicineSelect}/{typeSelect}/{amount}/{selectDate}/{profileSelect}/{patSelect}/{typepackingSelect}")
     public void newRecipe(
-        
-                        
                         @PathVariable long nummed,
                         @PathVariable long medicineSelect,
                         @PathVariable long typeSelect,
-                        @PathVariable String amount,
+                        @PathVariable long amount,
                         @PathVariable String selectDate,
                         @PathVariable long profileSelect,
-                        @PathVariable long patSelect) 
+                        @PathVariable long patSelect,
+                        @PathVariable long typepackingSelect) 
                   {
                     Recipe recipe = new Recipe();
                     Medicine medicine = medicineRepository.findById(medicineSelect);
                     Typemedicine typemedicine = typemedicineRepository.findById(typeSelect);
                     Profile profile = profileRepository.findById(profileSelect);
                     PatientManagement patientManagement = patientManagementRepository.findById(patSelect);
+                    Typepacking typepacking = typepackingRepository.findById(typepackingSelect);
                     recipe.setNumber(nummed);
                     recipe.setAmount(amount);
                     String[] b = selectDate.split(" ");
@@ -75,6 +80,7 @@ public class RecipeController {
             recipe.setPatientManagement(patientManagement);
             recipe.setProfile(profile);
             recipe.setTypemedicine(typemedicine);
+            recipe.setTypepacking(typepacking);
             recipeRepository.save(recipe);
     }
     
