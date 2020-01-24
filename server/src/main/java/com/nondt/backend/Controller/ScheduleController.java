@@ -39,7 +39,20 @@ public class ScheduleController {
         return scheduleRepository.findAll().stream().collect(Collectors.toList());
     }
 
-   
+    /*@GetMapping("/scheduledoctor/{name}")
+    
+    public Collection<Schedule> findScheduleByProfile (@PathVariable String name){
+        return scheduleRepository.findScheduleByProfile (profileRepository.findByName(name));
+    }*/
+    @GetMapping("/scheduledoctor/{id}")
+    public Collection<Schedule> findByName(@PathVariable("id") String id ){
+         return scheduleRepository.findBySchedule(id);
+     }
+
+     
+
+
+    
 
     @PostMapping("/schedule/{profileSelect}/{departSelect}/{selectedDate}/{timeSelect}")
     public Schedule newschedule(Schedule newschedule,

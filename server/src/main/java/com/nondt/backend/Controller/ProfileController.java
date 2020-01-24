@@ -48,6 +48,12 @@ public class ProfileController {
     public Collection<Profile> Profile() {
         return profileRepository.findAll().stream().collect(Collectors.toList());
     }
+    
+   /* @GetMapping("/profile/{name}")
+    public Collection<Profile> getProfileByName(@PathVariable("name") String name) {
+        return  profileRepository.findProfileByName(name);
+    }*/
+    
 
     @PostMapping("/profile/{departid}/{name}/{genderid}/{age}/{bloodid}/{tel}/{address}/{matid}")
     public void newProfile(
