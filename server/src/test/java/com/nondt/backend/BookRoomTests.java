@@ -87,7 +87,7 @@ public class BookRoomTests{
     }
 
     @Test
-    void B6008901_testScheduleWrongPast() {
+    void B6012755_testBookRoomWrongPast() {
         BookRoom bookRoom = new BookRoom();
     
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");

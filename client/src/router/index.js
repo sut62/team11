@@ -6,7 +6,9 @@ import Vue from 'vue'
    import Recipe from '../components/Recipe';
    import Schedule from '../components/Schedule';
    import BookRoom from '../components/BookRoom';
-   import Login from '../components/Login'
+   import Logindoctor from '../components/Logindoctor'
+   import Home from '../components/Home' 
+   import Loginemployee from '../components/Loginemployee'
    //import Index from '../components/Index';
    Vue.use(Router);
 
@@ -14,7 +16,9 @@ import Vue from 'vue'
        mode: 'history',
        base: process.env.BASE_URL,
        routes: [
-       {path: '/',component: Login},    
+       {path: '/',component: Home},
+       {path: '/Loginemployee',component: Loginemployee}, 
+       {path: '/Logindoctor',component: Logindoctor},    
        {path: '/BookRoom',component: BookRoom},
        {path: '/profile',component: Profile},
        {path: '/appointment',component: Appointment},

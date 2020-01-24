@@ -1,6 +1,6 @@
 <template>
 <html>
-  <Navbar/>
+  <NavbarforEm/>
 <body background="rr.jpg">
 <br>
 <br>
@@ -46,11 +46,11 @@
 </template> 
 
 <script>
-import Navbar from '../components/Navbar'
+import NavbarforEm from '../components/NavbarforEm'
 import http from "../http-common";
 export default {
    components: {
-    Navbar
+    NavbarforEm
   },
 data() {
     return {

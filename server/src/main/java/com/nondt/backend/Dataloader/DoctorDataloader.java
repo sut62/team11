@@ -11,20 +11,22 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AdminDataloader implements ApplicationRunner {
+public class DoctorDataloader implements ApplicationRunner {
 
 	@Autowired
-	private AdminRepository adminRepository;
+	private DoctorRepository doctorRepository;
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 
-		Admin Admin = new Admin();
-		Admin.setAdminusername("Admin");
-		Admin.setAdminpassword("Admin");
-		adminRepository.save(Admin);
+		Doctor doctor = new Doctor();
+		doctor.setDoctorusername("Doctor");
+		doctor.setDoctorpassword("Doctor");
+		doctorRepository.save(doctor);
 
-		adminRepository.findAll().forEach(System.out::println);
+		doctorRepository.findAll().forEach(System.out::println);
+
+
 
 	};
 }
