@@ -13,19 +13,19 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
-public class AdminController {
+public class EmployeeController {
 
     @Autowired
-    private final AdminRepository adminRepository;
+    private final EmployeeRepository employeeRepository;
 
-    public AdminController(AdminRepository adminRepository) {
-        this.adminRepository = adminRepository;
+    public EmployeeController(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
     }
 
-    @GetMapping("/admin/{adminusername}/{adminpassword}")
-    public Admin Admins(@PathVariable String adminusername, @PathVariable String adminpassword) {
-        return adminRepository.findAll().stream()
-                .filter(s -> s.getAdminpassword().equals(adminusername) && s.getAdminpassword().equals(adminpassword))
+    @GetMapping("/employee/{employeeusername}/{employeepassword}")
+    public Employee employee(@PathVariable String employeeusername, @PathVariable String employeepassword) {
+        return employeeRepository.findAll().stream()
+                .filter(s -> s.getEmployeeusername().equals(employeeusername) && s.getEmployeepassword().equals(employeepassword))
                 .collect(Collectors.toList()).get(0);
     }
 }

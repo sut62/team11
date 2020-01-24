@@ -11,12 +11,12 @@
                   <v-col class="text-center" md="mx-auto">
                     <v-container class="mx-auto">
                       <v-row class="justify-center">
-                        <v-icon size="50" color="red">account_circle</v-icon>
+                        <v-icon size="50" color="blue">account_circle</v-icon>
                         <v-card-text>
-                          <h1>LOGIN</h1>
+                          <h1>LOGIN FOR EMPLOYEE</h1>
                           <v-form>
                             <v-text-field
-                              color="red"
+                              color="blue"
                               label="๊Username"
                               name="login"
                               v-model="username"
@@ -26,7 +26,7 @@
 
                             <v-text-field
                               id="password"
-                              color="red"
+                              color="blue"
                               label="Password"
                               name="password"
                               v-model="password"
@@ -40,11 +40,18 @@
 
                           <v-btn
                             rounded
-                            color="red"
+                            color="blue"
                             dark
                             large
                             @click="getLoginUser"
                           >login</v-btn>
+                            <v-btn
+                            rounded
+                            color="blue"
+                            dark
+                            large
+                            @click="$router.push('/')"
+                          >back</v-btn>
                         </v-card-actions>
                       </v-row>
                     </v-container>
@@ -78,7 +85,7 @@ export default {
         alert("กรุณากรอก username และ password.");
       } else{
       http
-        .get("/admin" + "/" + this.username + "/" + this.password)
+        .get("/employee" + "/" + this.username + "/" + this.password)
         .then(response => {
           this.Logins = response.data;
           console.log(this.Logins);
