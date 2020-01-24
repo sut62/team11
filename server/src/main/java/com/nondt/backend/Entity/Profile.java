@@ -2,11 +2,12 @@ package com.nondt.backend.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -22,15 +23,19 @@ public class Profile {
     private Long profile_id;
 
     @NotNull
+    @Pattern(regexp = "[a-zA-Zก-ฮ ]*")
     private String name;
 
     @NotNull
+    @Positive
     private int age;
 
     @NotNull
+    @Size(min=0,max=80)
     private String address;
 
     @NotNull
+    @Pattern(regexp = "\\d{10}")
     private String phone;
 
     @ManyToOne
