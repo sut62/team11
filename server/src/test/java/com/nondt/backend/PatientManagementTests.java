@@ -130,8 +130,8 @@ public class PatientManagementTests {
         assertEquals("patientManage", v.getPropertyPath().toString());
     }
 
-    //ยังไม่ได้ ติดตรง repository
-   /* @Test
+    
+   @Test
     void b6008376_testPatientManageInsertIsOkay() {
         PatientManagement patientManagement = new PatientManagement();
 
@@ -147,9 +147,14 @@ public class PatientManagementTests {
 
         System.out.println("\n\n\n\n\ntestPatientManageInsertIsOkay Success"+"\n\n\n\n\n");
         System.out.println(patientManagement.getPatientManage());
-        found = patientManagementRepository.findById(patientManagement.getPatientManage_id());
-        assertEquals(patientManagement, found.get());
+        Optional<PatientManagement> found = patientManagementRepository.findById(patientManagement.getPatientManage_id());
+        assertEquals("1234", found.get().getPatientManage());
+        assertEquals(profile, found.get().getProfile());
+        assertEquals(patient, found.get().getPatient());
+        assertEquals(department, found.get().getDepartment());
+        assertEquals(date, found.get().getPatientDate());
+       
         
-    } */
+    } 
 }
 
