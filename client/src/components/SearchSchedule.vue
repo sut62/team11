@@ -8,7 +8,7 @@
     <br />
     
     <v-card class="mx-auto" max-width="550">
-      <div class = "teal lighten-1 text-center1">
+      <div class = "cyan darken-4 text-center1">
         
       <v-layout justify-center>
         <v-card-title  style=" font: 36px Lucida Console, Monospace; width: 100%; text-align=center;" class= "text-center1 white--text">  SEARCH SCHEDULE  </v-card-title>
@@ -124,7 +124,7 @@ export default {
 }
 
 .body1 {
-  background-color: #63ba9d;
+  background-color: #d4fafa;
 }
 </style>
 
