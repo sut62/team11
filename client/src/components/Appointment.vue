@@ -1,6 +1,6 @@
 <template>
 <html>
-  <NavbarforEm/>
+  <Navbar/>
 <body background="rr.jpg">
 <br>
 <br>
@@ -12,45 +12,46 @@
 <center>
     <md-field>
           <label>ชื่อแพทย์</label>
-          <md-select v-model="profileSelect">
+          <md-select v-model="profileSelect" id="p" class="p" >
                 <md-option v-for="profile in profiles" :key="profile.profile_id" :value="profile.profile_id">{{profile.name}} </md-option>
           </md-select>
   </md-field>
 
   <md-field>
           <label>ชื่อผู้ป่วย</label>
-          <md-select v-model="patSelect">
-                <md-option v-for="pat in patiens" :key="pat.patient_id" :value="pat.patient_id">{{pat.name}} </md-option>
+          <md-select v-model="patSelect" id="pa" class="pa" >
+                <md-option v-for="pat in patiens" :key="pat.patientManage_id" :value="pat.patientManage_id">{{pat.patient.name}} </md-option>
           </md-select>
   </md-field>
 
 
-<md-datepicker v-model="dateSelect">
+<md-datepicker v-model="dateSelect" id="da" class="da" >
       <label>วันที่</label>
     </md-datepicker>
 
 <md-field>
           <label>เวลานัดหมาย</label>
-          <md-select v-model="timeappointmentSelect">
+          <md-select v-model="timeappointmentSelect" id="ti" class="ti" >
                 <md-option v-for="time in times" :key="time.appointmenttime_id" :value="time.appointmenttime_id">{{time.timeap}} </md-option>
           </md-select>
   </md-field>
 
 <md-field>
       <label>สาเหตุนัดหมาย</label>
-      <md-input v-model ="remark"></md-input>
+      <md-input id="ca" class="ca" v-model ="remark"></md-input>
     </md-field><md-button class="md-raised" @click="savedata()">Save</md-button>
+   
 </center>
 </body>
 </html>
 </template> 
 
 <script>
-import NavbarforEm from '../components/NavbarforEm'
+import Navbar from '../components/Navbar'
 import http from "../http-common";
 export default {
    components: {
-    NavbarforEm
+    Navbar
   },
 data() {
     return {
@@ -107,7 +108,7 @@ data() {
     },
     getPatient() {
       http
-        .get("/patient")
+        .get("/patientmanage")
         .then(response => {
           this.patiens = response.data;
           console.log(response.data);
@@ -119,7 +120,11 @@ data() {
     },
     savedata(){
       if(this.profileSelect==null||this.patSelect==null|| this.dateSelect==null||this.timeappointmentSelect==null||this.remark==null ){
-            alert("บันทึกข้อมูลไม่สำเร็จ กรุณากรอกข้อมูลให้ครบ");
+           this.$alert(
+                                      "บันทึกข้อมูลไม่สำเร็จ",
+                                      "Warning",
+                                      "warning"
+                                   ).then(() => console.log("Closed"));
       }
            else{ http
                     .post(
@@ -142,7 +147,11 @@ data() {
                       console.log(e);
                     });
         console.log(this.profileSelect,this.patSelect,this.dateSelect,this.timeappointmentSelect,this.remark);
-            alert("บันทึกข้อมูลสำเร็จ");
+           this.$alert(
+                                     "บันทึกข้อมูลสำเร็จ",
+                                     "Success",
+                                     "success"
+                               ).then(() => console.log("Closed"));
            }
     }
   },
