@@ -5,6 +5,7 @@ import Vue from 'vue'
    import PatientManagement from '../components/PatientManagement';
    import Recipe from '../components/Recipe';
    import Schedule from '../components/Schedule';
+   import ProfileTable from '../components/ProfileTable';
    import BookRoom from '../components/BookRoom';
    import Logindoctor from '../components/Logindoctor'
    import Home from '../components/Home' 
@@ -21,6 +22,7 @@ import Vue from 'vue'
        {path: '/Logindoctor',component: Logindoctor},    
        {path: '/BookRoom',component: BookRoom},
        {path: '/profile',component: Profile},
+       {path: '/profiletable',component: ProfileTable},
        {path: '/appointment',component: Appointment},
        {path: '/patientmanagement',component: PatientManagement},
        {path: '/recipe',component: Recipe},

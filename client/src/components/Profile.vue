@@ -16,10 +16,10 @@
           </md-select>
         </md-field>
 
-        <md-field>
+      <md-field>
       <label>ชื่อ</label>
       <md-input id="name" type="text" class="Name" v-model="name"></md-input>
-    </md-field>
+      </md-field>
 
     <md-field>
       <label>อายุ</label>
@@ -76,6 +76,8 @@ export default {
    components: {
     NavbarforEm
   },
+
+  
 data() {
     return {
     departments : null ,
@@ -187,9 +189,9 @@ data() {
                           "บันทึกข้อมูลสำเร็จ",
                           "Success",
                           "success"
-                    ).then(() => console.log("Closed"));
+                    ).then(() => console.log("Closed",location.reload()));
 
-                window.location.reload()
+                //window.location.reload()
             }
         },
         clear() {

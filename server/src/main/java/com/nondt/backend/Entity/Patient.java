@@ -23,7 +23,6 @@ public class Patient {
     @Id
     @SequenceGenerator(name="patient_seq",sequenceName="patient_seq")               
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="patient_seq")  
-
     private  long patient_id;
     private  String name;
     private  String title_name;

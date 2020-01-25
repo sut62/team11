@@ -61,7 +61,6 @@ public class PatientManagementController {
                 patientManagement.setProfile(profile);
                 String[] b = date.split(" ");
             int year = Integer.valueOf(b[3]);
-
             int day = Integer.valueOf(b[2]);
             int month = 1 ;
 
