@@ -14,7 +14,8 @@
     "vue": "^2.6.10",
     "vue-material": "^1.0.0-beta-11",
     "vue-simple-alert": "^1.1.1",
-    "vuetify": "^2.2.3"
+    "vuetify": "^2.2.3",
+    "vuelidate": "0.7.5"
   },
   "devDependencies": {
     "@tygr/vue-time-picker": "^1.0.9",
