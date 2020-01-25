@@ -10,6 +10,7 @@ import Vue from 'vue'
    import Logindoctor from '../components/Logindoctor'
    import Home from '../components/Home' 
    import Loginemployee from '../components/Loginemployee'
+   import SearchPatient from '../components/SearchPatient';
    //import Index from '../components/Index';
    Vue.use(Router);
 
@@ -25,6 +26,7 @@ import Vue from 'vue'
        {path: '/profiletable',component: ProfileTable},
        {path: '/appointment',component: Appointment},
        {path: '/patientmanagement',component: PatientManagement},
+       {path: '/searchPatient',component: SearchPatient},
        {path: '/recipe',component: Recipe},
        {path: '/schedule',component: Schedule},
        //{path: '/',component: Index}
