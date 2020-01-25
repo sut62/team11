@@ -12,7 +12,7 @@
         </div>
 
         <md-field md-clearable class="md-toolbar-section-end">
-          <md-input placeholder="กรอกชื่อผู้ป่วย" v-model="search" @input="searchOnTable" />
+          <md-input id="patient" class="Patient" placeholder="กรอกชื่อผู้ป่วย" v-model="search" @input="searchOnTable" />
         </md-field>
       </md-table-toolbar>
 
