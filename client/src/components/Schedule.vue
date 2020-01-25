@@ -105,6 +105,7 @@ export default {
     };
   },
   methods: {
+    /* eslint-disable no-console */
     
     getProfile() {
       http
