@@ -14,7 +14,8 @@
       <v-toolbar-items >
         <v-btn text @click="$router.push('/profile')">เพิ่มข้อมูลแพทย์</v-btn>
         <v-btn text @click="$router.push('/profiletable')">ตารางข้อมูลแพทย์</v-btn>
-        <v-btn text @click="$router.push('/appointment')">นัดผู้ป่วย</v-btn>
+        <v-btn text @click="$router.push('/appointment')">นัดหมายแพทย์</v-btn>
+        <v-btn text @click="$router.push('/searchappointment')">ข้อมูลการนัดหมายแพทย์</v-btn>
         <v-btn text @click="$router.push('/')" >ออกจากระบบ</v-btn>
       </v-toolbar-items>
     </v-toolbar>
