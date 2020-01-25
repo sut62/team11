@@ -30,6 +30,11 @@ public class AppointmentController {
         this.appointmentRepository = appointmentRepository;
     }
 
+    @GetMapping("/appointment")
+    public Collection<Appointment> appointment() {
+        return appointmentRepository.findAll().stream().collect(Collectors.toList());
+    }
+
     @PostMapping("/appointment/{profileSelect}/{patSelect}/{dateSelect}/{timeappointmentSelect}/{remark}")
     public void newAppointment(
         

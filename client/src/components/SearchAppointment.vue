@@ -1,105 +1,93 @@
 <template>
 <html>
-   <NavbarforEm/>
-<body background="doc1.jpg">
+ <NavbarforEm/>
 
-    <div style="width:100%">
-    <md-table v-model="searched" md-sort="name" md-sort-order="asc" md-card md-fixed-header style="width:100%">
-      <md-table-toolbar>
-        <div class="md-toolbar-section-start">
-          <h1 class="md-title">Users</h1>
-        </div>
+<div class = "light-blue lighten-4">
+        
+      <v-layout justify-center>
+        <v-card-title  style=" font: 18px Lucida Console, Monospace; width: 100%; text-align=center;" class= "text-center1 white--text">  ข้อมูลการนัดหมายแพทย์  </v-card-title>
+      </v-layout>
+    </div>
+  <center>
+<v-card class="mx-auto" max-width="max-auto">
+    <v-data-table
+        hide-default-footer   :headers="headers"
+          :items="items"
+          :items-per-page="5"
+          class="elevation-1"
+  ></v-data-table>
+  </v-card>
+  </center>
+  </html>
+  </template>
 
-        <md-field md-clearable class="md-toolbar-section-end">
-          <md-input placeholder="Search by name..." v-model="search" @input="searchOnTable" />
-        </md-field>
-      </md-table-toolbar>
-
-      
-
-      <md-table-row slot="md-table-row" slot-scope="{ item }">
-        <md-table-cell md-label="ชื่อแพทย์"  >{{ item.profile.name }}</md-table-cell>
-        <md-table-cell md-label="ชื่อผู้ป่วย" >{{ item.patient.name }}</md-table-cell>
-        <md-table-cell md-label="วันที่นัดหมาย" >{{ item.dateap }}</md-table-cell>
-        <md-table-cell md-label="เวลาที่นัดหมาย" >{{ item.appointmenttime.timeap }}</md-table-cell>
-        <md-table-cell md-label="สาเหตุ" >{{ item.cause }}</md-table-cell>
-      </md-table-row>
-    </md-table>
-  </div>
-
-</body>
-</html>
-</template>
-<script>
- const toLower = text => {
-    return text.toString().toLowerCase()
-  }
-
-  const searchByName = (items, term) => {
-    if (term) {
-      return items.filter(item => toLower(item.profile.name).includes(toLower(term)))
-    }
-
-    return items
-  }
-import NavbarforEm from '../components/NavbarforEm'
+  <script>
 import http from "../http-common";
+import NavbarforEm from '../components/NavbarforEm'
+
 export default {
-   components: {
+  components: {
     NavbarforEm
   },
-data() {
+
+  name: "Appoint",
+   
+  data() {
     return {
-      appointments: null ,
-       search: '',
-      searched: []
-     
+       
+        
+        
+        
+      
+      
+      headers: [
+        { text: "Doctor", value: "profile.name" },
+        { text: "Patient", value: "patient.name" },
+        { text: "Date", value: "dateap" },
+        { text: "Time", value: "appointmenttime.timeap" },
+        { text: "Cause", value: "cause" },
+      ],
+      
+      
+      items:[],
+      
+
     };
   },
-  methods: {
-        /* eslint-disable no-console */
-    getAppointments() {
-      http
-        .get("/appointments")
-        .then(response => {
-          this.appointments = response.data;
-          this.searched = response.data;
-          console.log(response.data);
-        })
-        .catch(e => {
-          console.log(e);
-        });
 
-    },
-    
-    
-      searchOnTable () {
-        this.searched = searchByName(this.appointments, this.search);
-      
-    },
-   
-   
+  methods: {
+    /* eslint-disable no-console */
+    getApp (){
+      http
+      .get("/appointment")
+      .then(response => {
+                    this.items = response.data;
+                    console.log(this.items);
+                    
+                })
+                .catch(e => {
+                    console.log(e);
+                    
+                });
+
+    }
+        
+       
   },
+
     mounted() {
-     this.getAppointments();
-  }
+      this.getApp ();
+  },
+
+ clear() {
+            this.$refs.form.reset();
+        }
+        /* eslint-disable no-console */
+
+  
 }
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
 
-.md-field{
-  max-width: 400px;
-}
-.md-card{
-  
-  width: 500px;
-    height: 500px;
-  background-color: white;
-}
-.body {
-  background-color: #E6E6FA;
-}
 
-</style>
-  
+
+
