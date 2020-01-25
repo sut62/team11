@@ -12,6 +12,7 @@ import Vue from 'vue'
    import Loginemployee from '../components/Loginemployee'
    import SearchPatient from '../components/SearchPatient';
    import SearchAppointment from '../components/SearchAppointment';
+   import SearchSchedule from '../components/SearchSchedule';
    //import Index from '../components/Index';
    Vue.use(Router);
 
@@ -31,6 +32,7 @@ import Vue from 'vue'
        {path: '/recipe',component: Recipe},
        {path: '/schedule',component: Schedule},
        {path: '/searchappointment',component: SearchAppointment},
+       {path: '/searchschedule',component: SearchSchedule},
        //{path: '/',component: Index}
        ]
    });

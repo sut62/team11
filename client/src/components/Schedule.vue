@@ -156,7 +156,7 @@ export default {
         .then(response => {
           console.log(response);
           this.$alert("กรอกข้อมูลสำเร็จ", "Success", "success").then(() =>
-            console.log("Success")
+            console.log("Success",location.reload())
           );
         })
         .catch(e => {
