@@ -1,7 +1,7 @@
 <template>
 <html>
   <Navbar />
-  <body class="body">
+  <body class="body3">
     <br />
     <br />
     <br />
@@ -105,7 +105,7 @@ export default {
     };
   },
   methods: {
-    /* eslint-disable no-console */
+    
     getProfile() {
       http
         .get("/profile")
@@ -128,7 +128,7 @@ export default {
           console.log(e);
         });
     },
-    // ดึงข้อมูล Pilot ใส่ combobox
+    
     getWorktime() {
       http
         .get("/worktime")
@@ -185,7 +185,7 @@ export default {
   background-color: white;
 }
 
-.body {
-  background-color: #293214;
+.body3 {
+  background-color: #a3d4d0;
 }
 </style>
