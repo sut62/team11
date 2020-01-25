@@ -86,15 +86,32 @@
           </md-select>
           
     </md-field>
-    <md-button class="md-raised md-primary" @click="savedata()">บันทึกข้อมูล</md-button>
-
+    <md-button class="md-raised md-primary" @click="savedata()">บันทึกข้อมูล</md-button> 
+    <md-button class="md-raised md-primary" @click="dialog = true">แสดงข้อมูลการสั่งจ่ายยา</md-button> 
     <br/>
-    
     <br>
-
     </div>
       
       </center>
+      <v-row justify="center">
+    <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
+      <v-card>
+        <v-toolbar dark color="primary">
+          <v-btn icon dark @click="dialog = false">
+            <v-icon>close</v-icon>
+          </v-btn>
+          <v-toolbar-title>ข้อมูลการสั่งจ่ายยา</v-toolbar-title>
+          <v-spacer></v-spacer>
+        </v-toolbar>
+        <v-data-table
+          :headers="headers"
+          :items="desserts"
+          :items-per-page="5"
+          class="elevation-1"
+  ></v-data-table>
+      </v-card>
+    </v-dialog>
+  </v-row>
 </center>
 </body>
 </center>
@@ -111,6 +128,10 @@ export default {
   },
 data() {
     return {
+    dialog: false,
+    notifications: false,
+    sound: true,
+    widgets: false,
     medicines : null,
     medicineSelect : null,
     types: null,
@@ -125,12 +146,43 @@ data() {
     patSelect: null,
     pats : null,
 
+     headers: [
+      //{ text: "ID", value: "id" },
+        {
+          text: "เลขที่สั่งจ่าย",
+          align: "left",
+          sortable: false,
+          value: "number"
+        },
+        { text: "ชื่อยา", value: "patientManagement.patient.name" },
+        { text: "ชนิด", value: "typemedicine.typemedicine_name" },
+        { text: "จำนวน", value: "amount" },
+        { text: "ประเภทบรรจุภัณฑ์", value: "typepacking.typepacking_name" },  
+        { text: "วันที่จ่ายยา", value: "date" },
+        { text: "แพทย์ผู้สั่งจ่ายยา", value: "profile.name" },
+        { text: "คนไข้", value: "patientManagement.patient.name" },
+      ],
+
+    desserts:[],
+
     };
   },
   methods: {
         /* eslint-disable no-console */
-    
+        getrecipe(){
 
+             http
+        .get("/recipe")
+        .then(response => {
+          this.desserts = response.data;
+          console.log(this.desserts);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+
+        },
+        
 
           getMedicine() {
       http
@@ -234,6 +286,7 @@ data() {
       this.getProfile();
       this.getPatient();
       this.getTypepack();
+      this.getrecipe();
   }
 }
 

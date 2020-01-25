@@ -4,6 +4,7 @@
   <body background="blue-and-silver-stetoscope-40568.jpg">
   <center>
     
+    <br>
     <md-card class="blue lighten-5" md-with-hover>
         <md-card-header>
           <div class="md-title">จองห้องสำหรับแพทย์</div>
@@ -15,7 +16,7 @@
       <md-field>
           <label>แพทย์ผู้ทำการจองห้อง</label>
           <md-select id="doc" v-model="profileSelect">
-                <md-option v-for="profile in profiles" :key="profile.profile_id" :value="profile.profile_id">{{profile.name}} </md-option>
+                <md-option id="doc" v-for="profile in profiles" :key="profile.profile_id" :value="profile.profile_id">{{profile.name}} </md-option>
           </md-select>
   </md-field>
       </div>
@@ -24,7 +25,7 @@
      <md-field>
           <label >ชื่อคนไข้</label>
           <md-select id="pat"  v-model="patSelect">
-                 <md-option v-for="pat in pats" :key="pat.patientManage_id" :value="pat.patientManage_id">{{pat.patient.name}} </md-option>
+                 <md-option id="pat" v-for="pat in pats" :key="pat.patientManage_id" :value="pat.patientManage_id">{{pat.patient.name}} </md-option>
           </md-select>
     </md-field>
       </div>
@@ -32,12 +33,13 @@
       <md-field>
           <label>ห้อง</label>
           <md-select id="room"  v-model="roomSelect">
-                 <md-option v-for="room in rooms" :key="room.room_id" :value="room.room_id">{{room.room}} </md-option>
+                 <md-option id="room" v-for="room in rooms" :key="room.room_id" :value="room.room_id">{{room.room}} </md-option>
           </md-select>
   </md-field>
       </div>
       <v-col cols="10"  md="1000">
                 <v-menu
+                  id="menu"
                   ref="menu"
                   v-model="menu"
                   :close-on-content-click="false"
@@ -48,7 +50,7 @@
                   min-width="290px"
                 >
                   <template v-slot:activator="{ on }">
-                    <v-text-field
+                    <v-text-field id="dateS"
                       v-model="dateS"
                       label="เลือกวันที่ทำการจอง"
                       prepend-icon="event"
@@ -66,6 +68,7 @@
         
           <v-col cols="10"  md="1000">
       <v-menu
+        id="time1"
         ref="menu"
         v-model="menu2"
         :close-on-content-click="false"
@@ -78,6 +81,7 @@
       >
         <template v-slot:activator="{ on }">
           <v-text-field
+            id="timeS"
             v-model="timestart"
             label="Picker in menu"
             prepend-icon="access_time"
@@ -86,7 +90,7 @@
           ></v-text-field>
         </template>
         <v-time-picker
-        id ="times"
+        id ="menu2"
           v-if="menu2"
           v-model="timestart"
           full-width
@@ -97,6 +101,7 @@
     <v-col cols="10"  md="1000">
       <v-menu
         ref="menu"
+        id ="modal2"
         v-model="modal2"
         :close-on-content-click="false"
         :nudge-right="40"
@@ -125,8 +130,9 @@
       </v-menu>
     </v-col>      
        <md-field>
+
       <label>บันทึกอาการและการรักษา (ห้ามมีเครื่องหมาย /)</label>
-      <md-textarea v-model="description"></md-textarea>
+      <md-textarea id ="des" v-model="description"></md-textarea>
       <md-icon>description</md-icon>
     </md-field>
          <center>
@@ -259,9 +265,8 @@ data() {
             console.log(e);
             });
             },
-
+    
     savedata(){
-
           http
             .post(
                 "/Bookroom/" +
@@ -315,9 +320,9 @@ data() {
 .md-field{
   max-width: 400px;
 }
-.md-card {
-    width: 580px;
-    margin: 30px;
+.card {
+    width: auto;
+    height: auto;
     display: inline-block;
     vertical-align: top;
   }
