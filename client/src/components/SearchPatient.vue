@@ -16,7 +16,8 @@
         </md-field>
       </md-table-toolbar>
 
-      
+      <md-table-empty-state md-label="ไม่พบข้อมูลผู้ป่วย"></md-table-empty-state>
+      <br><br><br><br><br><br>
 
       <md-table-row slot="md-table-row" slot-scope="{ item }">
         <md-table-cell md-label="คำนำหน้าชื่อ"  >{{ item.patient.title_name }}</md-table-cell>
