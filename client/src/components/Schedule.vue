@@ -162,7 +162,7 @@ export default {
         })
         .catch(e => {
           console.log(e);
-          this.$alert("กรอกข้อมูลไม่ครบ", "Warning", "warning").then(() =>
+          this.$alert("กรอกข้อมูลไม่สำเร็จ", "Warning", "warning").then(() =>
             console.log("Closed")
           );
         });
