@@ -1,9 +1,10 @@
 <template>
 <html>
   <Navbar/>
+  <body background="blue-and-silver-stetoscope-40568.jpg">
   <center>
     
-    <md-card class="md-accent" md-with-hover>
+    <md-card class="blue lighten-5" md-with-hover>
         <md-card-header>
           <div class="md-title">จองห้องสำหรับแพทย์</div>
         </md-card-header>
@@ -130,12 +131,41 @@
     </md-field>
          <center>
           <md-button id="btsave" class="md-raised md-primary" @click = "savedata()">บันทึก</md-button> 
+          <md-button id="btdialog" class="md-raised md-primary" @click = "dialog = true">แสดงข้อมูลการจอง</md-button> 
         </center>
+        
     </div>
       </md-card-content>
     </md-card>
-</center>
+  <v-dialog
+      v-model="dialog"
+      max-width="1000"
+      max-height="500"
+    >
+      <v-card class="blue lighten-5">
+        <v-card-title class="headline">ข้อมูลการจองห้องภายในโรงพยาบาล</v-card-title>
+        <v-card >
+         <v-data-table 
+            :headers="headers"
+            :items="items"
+            :items-per-page="5"
+            class="elevation-1  blue lighten-5"
+  ></v-data-table>
+        </v-card>
 
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="green darken-1"
+            text
+            @click="dialog = false">
+            ปิด
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+</center>
+  </body>
 </html>
 </template>
 <script>
@@ -147,6 +177,23 @@ export default {
   },
 data() {
     return {
+      headers: [
+      //{ text: "ID", value: "id" },
+        {
+          text: "ID",
+          align: "left",
+          sortable: false,
+          value: "id"
+        },
+        { text: "ชื่อแพทย์", value: "profile.name" },
+        { text: "ชื่อผู้ป่วย", value: "patientManagement.patient.name" },
+        { text: "ห้อง", value: "room.room" },
+        { text: "วันที่จอง", value: "dateOfBook" },
+        { text: "เวลาเริ่มใช้ห้อง", value: "timeOfStart" },
+        { text: "เวลาสิ้นสุดการใช้ห้อง", value: "timeOfEnd" }
+      ],
+      items: [],
+      dialog: false,
       profiles: null,
       profileSelect : null,
       patSelect: null,
@@ -160,10 +207,23 @@ data() {
         modal2: false,
       timeend : null,
      description : null,
+
     };
   },
   methods: {
         /* eslint-disable no-console */
+     getBookRoom() {
+      http
+        .get("/Bookroom")
+        .then(response => {
+          this.items = response.data;
+          console.log(this.items);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+
+    },
     getProfile() {
       http
         .get("/profile")
@@ -225,7 +285,7 @@ data() {
                                "บันทึกข้อมูลสำเร็จ",
                                "Success",
                                "success"
-                   ).then(() => console.log("Closed"));
+                   ).then(() => console.log("Closed",location.reload()));
                     })
                     .catch(e => {
                       console.log(e);
@@ -233,7 +293,7 @@ data() {
                            "บันทึกข้อมูลไม่สำเร็จ",
                            "Warning",
                            "warning"
-                        ).then(() => console.log("Closed"));
+                        ).then(() => console.log("Closed",location.reload()));
                         
                     });
                         
@@ -244,7 +304,9 @@ data() {
       this.getProfile();
       this.getPatient();
       this.getRoom();
-  }
+      this.getBookRoom();
+  },
+
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->

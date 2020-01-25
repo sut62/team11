@@ -66,7 +66,7 @@ public class BookRoomTests{
     }
 
     @Test
-    void testCustomerNameMustNotBeNull() {
+    void B6012755_testCustomerNameMustNotBeNull() {
         BookRoom bookRoom = new BookRoom();
         bookRoom.setNote(null);
         bookRoom.setDateOfBook(dateOfBook);
