@@ -5,7 +5,7 @@
   <center>
     <div>
     <br>
-      <md-card>
+      
       <div class="md-layout-item">
         <label>แพทย์</label>
       <md-field>
@@ -66,7 +66,7 @@
         </center>
 
 
-</md-card>
+
     </div>
 
 </center>
@@ -195,12 +195,7 @@ data() {
 .md-field{
   max-width: 400px;
 }
-.md-card{
-  
-  width: 500px;
-    height: 700px;
-  background-color: white;
-}
+
 .body {
   background-color: #E6E6FA;
 }
