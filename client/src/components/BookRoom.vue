@@ -2,20 +2,21 @@
 <html>
   <Navbar/>
   <body background="blue-and-silver-stetoscope-40568.jpg">
-  <center>
+    <center>
+      <br>
+      <body class="card1">
     
     <br>
-    <md-card class="blue lighten-5" md-with-hover>
-        <md-card-header>
-          <div class="md-title">จองห้องสำหรับแพทย์</div>
-        </md-card-header>
-        <md-card-content>
+    <center>
+        
+         <h1> จองห้องสำหรับแพทย์</h1>
+        
           
     <div>
       <div class="md-layout-item">
       <md-field>
           <label>แพทย์ผู้ทำการจองห้อง</label>
-          <md-select id="doc" v-model="profileSelect">
+          <md-select id="doc" class="profileSelect" v-model="profileSelect">
                 <md-option id="doc" v-for="profile in profiles" :key="profile.profile_id" :value="profile.profile_id">{{profile.name}} </md-option>
           </md-select>
   </md-field>
@@ -24,7 +25,7 @@
       <div class="md-layout-item">
      <md-field>
           <label >ชื่อคนไข้</label>
-          <md-select id="pat"  v-model="patSelect">
+          <md-select id="pat" class="patSelect"  v-model="patSelect">
                  <md-option id="pat" v-for="pat in pats" :key="pat.patientManage_id" :value="pat.patientManage_id">{{pat.patient.name}} </md-option>
           </md-select>
     </md-field>
@@ -32,14 +33,15 @@
        <div class="md-layout-item">
       <md-field>
           <label>ห้อง</label>
-          <md-select id="room"  v-model="roomSelect">
+          <md-select id="room" class="roomSelect" v-model="roomSelect">
                  <md-option id="room" v-for="room in rooms" :key="room.room_id" :value="room.room_id">{{room.room}} </md-option>
           </md-select>
   </md-field>
       </div>
-      <v-col cols="10"  md="1000">
+      <v-col cols="12" lg="5">
                 <v-menu
                   id="menu"
+                  class="dateS"
                   ref="menu"
                   v-model="menu"
                   :close-on-content-click="false"
@@ -66,10 +68,11 @@
                 </v-menu>
               </v-col>            
         
-          <v-col cols="10"  md="1000">
+          <v-col cols="12" lg="5">
       <v-menu
         id="time1"
         ref="menu"
+        class="time1"
         v-model="menu2"
         :close-on-content-click="false"
         :nudge-right="40"
@@ -91,14 +94,16 @@
         </template>
         <v-time-picker
         id ="menu2"
+        class="time2"
           v-if="menu2"
           v-model="timestart"
           full-width
           @click:minute="$refs.menu.save(time)"
         ></v-time-picker>
+        <v-btn text color="primary" @click="menu2 = false">Ok</v-btn>
       </v-menu>
     </v-col>
-    <v-col cols="10"  md="1000">
+    <v-col cols="12" lg="5" >
       <v-menu
         ref="menu"
         id ="modal2"
@@ -127,6 +132,7 @@
           full-width
           @click:minute="$refs.menu.save(time)"
         ></v-time-picker>
+        <v-btn text color="primary" @click="modal2 = false">Ok</v-btn>
       </v-menu>
     </v-col>      
        <md-field>
@@ -141,8 +147,7 @@
         </center>
         
     </div>
-      </md-card-content>
-    </md-card>
+    
   <v-dialog
       v-model="dialog"
       max-width="1000"
@@ -170,8 +175,13 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    
+    </center>
+    </body>
 </center>
   </body>
+
+  
 </html>
 </template>
 <script>
@@ -320,10 +330,12 @@ data() {
 .md-field{
   max-width: 400px;
 }
-.card {
-    width: auto;
-    height: auto;
-    display: inline-block;
-    vertical-align: top;
-  }
+.card1 {
+  width: 40%;
+  height: 50%;
+
+  background-color: #E3F2FD;
+}
+
+
 </style>
