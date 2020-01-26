@@ -18,31 +18,31 @@
 
     <md-field>
       <label>เลขที่จ่ายยา</label>
-      <md-input v-model="nummed"></md-input>
+      <md-input id="nm" class="nm" v-model="nummed"></md-input>
     </md-field>
 
     <md-field>
           <label >ชื่อยา</label>
-          <md-select v-model="medicineSelect">
+          <md-select id="m" class="m" v-model="medicineSelect">
                  <md-option v-for="medicine in medicines" :key="medicine.medicine_id" :value="medicine.medicine_id">{{medicine.medicine_name}} </md-option>
           </md-select>
     </md-field>
 
     <md-field>
           <label >ชนิดยา</label>
-          <md-select v-model="typeSelect">
+          <md-select id="td" class="td" v-model="typeSelect">
               <md-option v-for="type in types" :key="type.typemedicine_id" :value="type.typemedicine_id">{{type.typemedicine_name}} </md-option>
           </md-select>
     </md-field>
 
     <md-field>
       <label>จำนวน</label>
-      <md-input v-model="amount"></md-input>
+      <md-input id="a" class="a" v-model="amount"></md-input>
     </md-field>
 
     <md-field>
           <label >ประเภทบรรจุภัณฑ์</label>
-          <md-select v-model="typepackingSelect">
+          <md-select id="tp" class="tp" v-model="typepackingSelect">
               <md-option v-for="typepack in typepackings" :key="typepack.typepacking_id" :value="typepack.typepacking_id">{{typepack.typepacking_name}} </md-option>
           </md-select>
     </md-field>
@@ -50,6 +50,7 @@
     
     <v-col cols="12" lg="5">
         <v-menu
+        id="td" class="td"
           v-model="menu2"
           :close-on-content-click="false"
           transition="scale-transition"
@@ -60,6 +61,7 @@
         >
           <template v-slot:activator="{ on }">
             <v-text-field
+            id="td" class="td"
               v-model="selectedDate"
               label="วันที่"
              
@@ -68,26 +70,26 @@
               v-on="on"
             ></v-text-field>
           </template>
-          <v-date-picker v-model="selectedDate" no-title @input="menu2 = false"></v-date-picker>
+          <v-date-picker id="td" class="td" v-model="selectedDate" no-title @input="menu2 = false"></v-date-picker>
         </v-menu>
       </v-col>
 
     <md-field>
           <label >ชื่อแพทย์สั่งจ่ายยา</label>
-          <md-select v-model="profileSelect">
+          <md-select id="dm" class="dm" v-model="profileSelect">
                  <md-option v-for="profile in profiles" :key="profile.profile_id" :value="profile.profile_id">{{profile.name}} </md-option>
           </md-select>
     </md-field>
 
     <md-field>
           <label >ชื่อคนไข้</label>
-          <md-select v-model="patSelect">
+          <md-select id="pm" class="pm" v-model="patSelect">
                  <md-option v-for="pat in pats" :key="pat.patientManage_id" :value="pat.patientManage_id">{{pat.patient.name}} </md-option>
           </md-select>
           
     </md-field>
-    <md-button class="md-raised md-primary" @click="savedata()">บันทึกข้อมูล</md-button> 
-    <md-button class="md-raised md-primary" @click="dialog = true">แสดงข้อมูลการสั่งจ่ายยา</md-button> 
+    <md-button  id="cs" class="md-raised md-primary" @click="savedata()">บันทึกข้อมูล</md-button> 
+    <md-button  id="sm" class="md-raised md-primary" @click="dialog = true">แสดงข้อมูลการสั่งจ่ายยา</md-button> 
     <br/>
     <br>
     </div>
@@ -263,14 +265,17 @@ data() {
 
                     )
                     .then(response => {
-                      console.log(response);
-                       alert("บันทึกข้อมูลสำเร็จ");
-                       window.location.reload()
-                    })
-                    .catch(e => {
-                      alert("บันทึกข้อมูลไม่สำเร็จ กรุณากรอกข้อมูลให้ครบ");
-                      console.log(e);
-                    });
+          console.log(response);
+          this.$alert("กรอกข้อมูลสำเร็จ", "Success", "success").then(() =>
+            console.log("Success",location.reload())
+          );
+        })
+        .catch(e => {
+          console.log(e);
+          this.$alert("กรอกข้อมูลไม่สำเร็จ", "Warning", "warning").then(() =>
+            console.log("Closed")
+          );
+        });
         
            
             
