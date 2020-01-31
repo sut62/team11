@@ -29,7 +29,7 @@
       <label>ข้อมูลของคนไข้</label>
       <md-field>
         <label>คำนำหน้าชื่อ</label>
-        <md-input id="title" class="Title" v-model="title"></md-input>
+        <md-input id="title" class="Title" v-model="title_name"></md-input>
       </md-field>
       </div>
 
@@ -42,7 +42,7 @@
       <md-field>
           <label>เพศ</label>
           <md-select id="gen" class="Gen" v-model="genSelect">
-                <md-option v-for="gender in genders" :key="gender.gender" :value="gender.gender">{{gender.gender}} </md-option>
+                <md-option v-for="gender in genders" :key="gender.gender_id" :value="gender.gender_id">{{gender.gender}} </md-option>
           </md-select>
   </md-field>
       </div>
@@ -54,14 +54,14 @@
 
       <md-field>
         <label>ผลตรวจ</label>
-        <md-input id="patient" class="Patient" v-model="pati"></md-input>
+        <md-input id="patient" class="Patient" v-model="patient_result"></md-input>
       </md-field>
 
       <md-datepicker id="date" class="Date" v-model="dateSelect">
       <label>วันที่</label>
     </md-datepicker>
          <center>
-          <md-button class="md-raised md-primary" @click = "savedata()">เพิ่ม</md-button> 
+          <md-button id="button"  class="md-raised md-primary" @click = "savedata()">เพิ่ม</md-button> 
          
         </center>
 
@@ -88,10 +88,10 @@ data() {
       departSelect : null,
       genders : null,
       genSelect : null,
-      title: null,
+      title_name: null,
       name : null,
       age: null,
-      pati : null,
+      patient_result : null,
       dateSelect : null,
     };
   },
@@ -145,14 +145,14 @@ data() {
                         "/" +
                         this.departSelect +
                         "/" +
-                        this.title +
+                        this.title_name +
                         "/" +
                         this.name +
                         "/" +
                        this.genSelect+
                         "/" +
                        this.age+
-                       "/"+this.pati+"/"+
+                       "/"+this.patient_result+"/"+
                        this.dateSelect
 
                     )
@@ -175,7 +175,7 @@ data() {
                         ).then(() => console.log("Closed"));
 
                     });
-        console.log(this.profileSelect,this.departSelect,this.title,this.name,this.genSelect,this.age,this.pati,this.dateSelect);
+        console.log(this.profileSelect,this.departSelect,this.title_name,this.name,this.genSelect,this.age,this.patient_result,this.dateSelect);
 
         }
 
