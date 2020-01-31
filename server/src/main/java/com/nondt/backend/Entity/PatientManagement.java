@@ -32,16 +32,20 @@ public class PatientManagement {
     @SequenceGenerator(name="patient_management_seq",sequenceName="patient_management_seq")               
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="patient_management_seq")  
 
-    private  Long patientManage_id;
+    private  Long patient_id;
 
     @NotNull
     @Size(min = 3 , max = 100)
     @Pattern(regexp = "[a-zA-Z0-9ก-๙-]*")
-    private  String patientManage;
+    private  String patient_result;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate patientDate;
     
+    
+    private  String name;
+    private  String title_name;
+    private  int age;
 
     @ManyToOne 
     private Profile profile; 
@@ -49,8 +53,8 @@ public class PatientManagement {
     @ManyToOne
     private Department department;
 
-    @OneToOne
-    private Patient patient;
+    @ManyToOne
+    private Gender gender;
     
     public PatientManagement(){}
 

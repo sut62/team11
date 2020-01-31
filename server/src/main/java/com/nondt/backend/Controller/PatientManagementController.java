@@ -23,7 +23,7 @@ public class PatientManagementController {
     @Autowired
     private PatientManagementRepository patientManagementRepository;
     @Autowired
-    private PatientRepository patientRepository;
+    private GenderRepository genderRepository;
     @Autowired
     private ProfileRepository profileRepository;
     @Autowired
@@ -32,33 +32,38 @@ public class PatientManagementController {
 
  
 
-    @GetMapping("/patientmanage")
+    @GetMapping("/patientmanagement")
     public Collection<PatientManagement> patientmanages() {
         return patientManagementRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @PostMapping("/patientmanagement/{profileSelect}/{departSelect}/{title}/{name}/{genSelect}/{age}/{pati}/{date}")
+    @PostMapping("/patientmanagement/{profileSelect}/{departSelect}/{title_name}/{name}/{genSelect}/{age}/{patient_result}/{date}")
     public void newPatientManagement(
 
-            @PathVariable long profileSelect, @PathVariable long departSelect, @PathVariable String title,
-            @PathVariable String name, @PathVariable String genSelect, @PathVariable String age,
-            @PathVariable String pati ,@PathVariable String date) 
-                  {
+            @PathVariable long profileSelect,
+            @PathVariable long departSelect,
+            @PathVariable String title_name,
+            @PathVariable String name,
+            @PathVariable long genSelect, 
+            @PathVariable String age,
+            @PathVariable String patient_result,
+            @PathVariable String date) 
+            {
 
-                Patient patient = new Patient();
-                patient.setTitle_name(title);
-                patient.setName(name);
-                patient.setGender(genSelect);
-                patient.setAge(Integer.valueOf(age));
-                patientRepository.save(patient);
+                
 
                 Department department = departmentRepository.findById(departSelect);
                 Profile profile = profileRepository.findById(profileSelect);
-                PatientManagement patientManagement = new PatientManagement();
-                patientManagement.setPatient(patient);
-                patientManagement.setPatientManage(pati);
-                patientManagement.setDepartment(department);
-                patientManagement.setProfile(profile);
+                Gender gender = genderRepository.findById(genSelect);
+
+                PatientManagement p1 = new PatientManagement();
+                p1.setTitle_name(title_name);
+                p1.setName(name);
+                p1.setGender(gender);
+                p1.setAge(Integer.valueOf(age));
+                p1.setPatient_result(patient_result);
+                p1.setDepartment(department);
+                p1.setProfile(profile);
                 String[] b = date.split(" ");
             int year = Integer.valueOf(b[3]);
             int day = Integer.valueOf(b[2]);
@@ -73,8 +78,8 @@ public class PatientManagementController {
 
 
             LocalDate localDate = LocalDate.of(year,month,day);
-                patientManagement.setPatientDate(localDate);
-                patientManagementRepository.saveAndFlush(patientManagement);
+                p1.setPatientDate(localDate);
+                patientManagementRepository.save(p1);
     }
 
 }
