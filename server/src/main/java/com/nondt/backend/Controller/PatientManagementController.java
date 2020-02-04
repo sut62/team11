@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import java.util.List;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,12 +30,25 @@ public class PatientManagementController {
     private DepartmentRepository departmentRepository;
 
 
- 
+    public PatientManagementController(PatientManagementRepository patientManagementRepository) {
+        this.patientManagementRepository = patientManagementRepository;
+    }
 
     @GetMapping("/patientmanagement")
     public Collection<PatientManagement> patientmanages() {
         return patientManagementRepository.findAll().stream().collect(Collectors.toList());
     }
+/*
+    @GetMapping("/patientmanage/")
+    public Collection<PatientManagement> findByName(@PathVariable("id") String id ){
+         return patientManagementRepository.findByPatientManagement(id);
+     }
+*/
+     @GetMapping("/patientmanage/{name}")
+    public Collection<PatientManagement> findByName(@PathVariable String name ){
+        return patientManagementRepository.findByNamePatient(name);
+     } 
+ 
 
     @PostMapping("/patientmanagement/{profileSelect}/{departSelect}/{title_name}/{name}/{genSelect}/{age}/{patient_result}/{date}")
     public void newPatientManagement(
