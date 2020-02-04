@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class PatientManagementTests {
 
     private Validator validator;
+
     @Autowired
     private PatientManagementRepository patientManagementRepository;
     @Autowired
@@ -30,131 +31,278 @@ public class PatientManagementTests {
     @Autowired
     private  DepartmentRepository departmentRepository;
     @Autowired
-    private  PatientRepository patientRepository;
+    private GenderRepository genderRepository;
 
-    Profile profile = new Profile();
-    Patient patient = new Patient();
-    Department department = new Department();
-    PatientManagement patientManagement = new PatientManagement();
-
+    
     @BeforeEach
     public void setup() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
-        long id =1 ;
-        profile = profileRepository.findById(id);
-        patient = patientRepository.findById(id);
-        department = departmentRepository.findById(id);
 
     }
-    //patientManage(ผลตรวจ) ต้องไม่ใช่ค่าว่าง
+
     @Test
-    void b6008376_testPatientManageMustNotNull() {
-        PatientManagement patientManagement = new PatientManagement();
+    void b6008376_testInsertOk(){
 
+        Department d = departmentRepository.findById(1);
+        Gender g = genderRepository.findById(1);
+        Profile profile = profileRepository.findById(1);
 
-        patientManagement.setPatientManage(null);
+        PatientManagement p = new PatientManagement();
+        p.setTitle_name("นางสาว");
+        p.setName("กมลฉัตร กมลลานนท์");
+        p.setAge(20);
+        p.setPatient_result("สบายดี");
         LocalDate date = LocalDate.now();
-        patientManagement.setPatientDate(date);
-        patientManagement.setProfile(profile);
-        patientManagement.setPatient(patient);
-        patientManagement.setDepartment(department);
+        p.setPatientDate(date);
+        p.setGender(g);
+        p.setProfile(profile);
+        p.setDepartment(d);
+        p = patientManagementRepository.saveAndFlush(p);
 
-        Set<ConstraintViolation<PatientManagement>> result = validator.validate(patientManagement);
-        System.out.println("\n\n\n\n\n testPatientManageMustNotNull Success"+"\n\n\n\n\n");
+        Optional<PatientManagement> found = patientManagementRepository.findById(p.getPatient_id());
+        assertEquals("นางสาว", found.get().getTitle_name());
+        assertEquals("กมลฉัตร กมลลานนท์", found.get().getName());
+        assertEquals(20, found.get().getAge());
+        assertEquals(date, found.get().getPatientDate());
+        assertEquals(g, found.get().getGender());
+        assertEquals(profile, found.get().getProfile());
+        assertEquals(d, found.get().getDepartment());
+    }
+
+    //title_name ต้องไม่ใช่ค่าว่าง
+    @Test
+    void b6008376_testTitleNameMustNotNull() {
+
+        Department department = departmentRepository.findById(1);
+        Gender gender = genderRepository.findById(1);
+        Profile profile = profileRepository.findById(1);
+        PatientManagement p = new PatientManagement();
+        p.setTitle_name(null);
+        p.setName("กมลฉัตร กมลลานนท์");
+        p.setAge(20);
+        p.setPatient_result("สบายดี");
+        LocalDate date = LocalDate.now();
+        p.setPatientDate(date);
+        p.setGender(gender);
+        p.setProfile(profile);
+        p.setDepartment(department);
+
+        Set<ConstraintViolation<PatientManagement>> result = validator.validate(p);
+        System.out.println("\n\n\n\n\n testTitleNameMustNotNull Success"+"\n\n\n\n\n");
         assertEquals(1, result.size());
         ConstraintViolation<PatientManagement> v = result.iterator().next();
         assertEquals("must not be null", v.getMessage());
-        assertEquals("patientManage", v.getPropertyPath().toString());
+        assertEquals("title_name", v.getPropertyPath().toString());
     }
 
-    //PatientManage(ผลตรวจ) ต้องไม่ยาวเกิน 100
+
+
+    //name ต้องไม่ใช่ค่าว่าง
     @Test
-    void b6008376_testPatientManageTooLong() {
-        PatientManagement patientManagement = new PatientManagement();
+    void b6008376_testNameMustNotNull() {
 
-
-        patientManagement.setPatientManage("12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901");
+        Department department = departmentRepository.findById(1);
+        Gender gender = genderRepository.findById(1);
+        Profile profile = profileRepository.findById(1);
+        PatientManagement p = new PatientManagement();
+        p.setTitle_name("นางสาว");
+        p.setName(null);
+        p.setAge(20);
+        p.setPatient_result("สบายดี");
         LocalDate date = LocalDate.now();
-        patientManagement.setPatientDate(date);
-        patientManagement.setProfile(profile);
-        patientManagement.setPatient(patient);
-        patientManagement.setDepartment(department);
+        p.setPatientDate(date);
+        p.setGender(gender);
+        p.setProfile(profile);
+        p.setDepartment(department);
 
-        Set<ConstraintViolation<PatientManagement>> result = validator.validate(patientManagement);
-        System.out.println("\n\n\n\n\n testPatientManageTooLong Success"+"\n\n\n\n\n");
+        Set<ConstraintViolation<PatientManagement>> result = validator.validate(p);
+        System.out.println("\n\n\n\n\n testNameMustNotNull Success"+"\n\n\n\n\n");
+        assertEquals(1, result.size());
+        ConstraintViolation<PatientManagement> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("name", v.getPropertyPath().toString());
+    }
+
+    //name มีความยาวเกิน 5 ตัวอักษร
+    @Test
+    void b6008376_testNameMoreThanMin() {
+
+        Department department = departmentRepository.findById(1);
+        Gender gender = genderRepository.findById(1);
+        Profile profile = profileRepository.findById(1);
+        PatientManagement p = new PatientManagement();
+        p.setTitle_name("นางสาว");
+        p.setName("1234");
+        p.setAge(20);
+        p.setPatient_result("สบายดี");
+        LocalDate date = LocalDate.now();
+        p.setPatientDate(date);
+        p.setGender(gender);
+        p.setProfile(profile);
+        p.setDepartment(department);
+
+        Set<ConstraintViolation<PatientManagement>> result = validator.validate(p);
+        System.out.println("\n\n\n\n\n testNameMoreThanMin Success"+"\n\n\n\n\n");
+        assertEquals(1, result.size());
+        ConstraintViolation<PatientManagement> v = result.iterator().next();
+        assertEquals("size must be between 5 and 50", v.getMessage());
+        assertEquals("name", v.getPropertyPath().toString());
+    }
+
+
+
+    //name มีความยาวไม่เกิน 50 ตัวอักษร
+    @Test
+    void b6008376_testNameLessThanMax() {
+
+        Department department = departmentRepository.findById(1);
+        Gender gender = genderRepository.findById(1);
+        Profile profile = profileRepository.findById(1);
+        PatientManagement p = new PatientManagement();
+        p.setTitle_name("นางสาว");
+        p.setName("123456789012345678901234567890123456789012345678901");
+        p.setAge(20);
+        p.setPatient_result("สบายดี");
+        LocalDate date = LocalDate.now();
+        p.setPatientDate(date);
+        p.setGender(gender);
+        p.setProfile(profile);
+        p.setDepartment(department);
+
+        Set<ConstraintViolation<PatientManagement>> result = validator.validate(p);
+        System.out.println("\n\n\n\n\n testNameLessThanMax Success"+"\n\n\n\n\n");
+        assertEquals(1, result.size());
+        ConstraintViolation<PatientManagement> v = result.iterator().next();
+        assertEquals("size must be between 5 and 50", v.getMessage());
+        assertEquals("name", v.getPropertyPath().toString());
+    }
+    //age ต้องไม่ต่ำกว่า 0
+    @Test
+    void b6008376_testAgeMustBeGreaterThanOrEqualsTo1() {
+
+        Department department = departmentRepository.findById(1);
+        Gender gender = genderRepository.findById(1);
+        Profile profile = profileRepository.findById(1);
+        PatientManagement p = new PatientManagement();
+        p.setTitle_name("นางสาว");
+        p.setName("กมลฉัตร กมลลานนท์");
+        p.setAge(0);
+        p.setPatient_result("สบายดี");
+        LocalDate date = LocalDate.now();
+        p.setPatientDate(date);
+        p.setGender(gender);
+        p.setProfile(profile);
+        p.setDepartment(department);
+
+        Set<ConstraintViolation<PatientManagement>> result = validator.validate(p);
+        System.out.println("\n\n\n\n\n testAgeMoreThanMin Success"+"\n\n\n\n\n");
+        assertEquals(1, result.size());
+        ConstraintViolation<PatientManagement> v = result.iterator().next();
+        assertEquals("must be greater than or equal to 1", v.getMessage());
+        assertEquals("age", v.getPropertyPath().toString());
+    }
+
+    //patient_result ต้องไม่ใช่ค่าว่าง
+    @Test
+    void b6008376_testPatientResultMustNotNull() {
+
+        Department department = departmentRepository.findById(1);
+        Gender gender = genderRepository.findById(1);
+        Profile profile = profileRepository.findById(1);
+        PatientManagement p = new PatientManagement();
+        p.setTitle_name("นางสาว");
+        p.setName("กมลฉัตร กมลลานนท์");
+        p.setAge(20);
+        p.setPatient_result(null);
+        LocalDate date = LocalDate.now();
+        p.setPatientDate(date);
+        p.setGender(gender);
+        p.setProfile(profile);
+        p.setDepartment(department);
+
+        Set<ConstraintViolation<PatientManagement>> result = validator.validate(p);
+        System.out.println("\n\n\n\n\n testPatientResultMustNotNull Success"+"\n\n\n\n\n");
+        assertEquals(1, result.size());
+        ConstraintViolation<PatientManagement> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("patient_result", v.getPropertyPath().toString());
+    }
+
+    //patient_result มีความยาวไม่เกิน 100 ตัวอักษร
+    @Test
+    void b6008376_testPatientResultLessThanMax() {
+        Department department = departmentRepository.findById(1);
+        Gender gender = genderRepository.findById(1);
+        Profile profile = profileRepository.findById(1);
+        PatientManagement p = new PatientManagement();
+        p.setTitle_name("นางสาว");
+        p.setName("กมลฉัตร กมลลานนท์");
+        p.setAge(20);
+        p.setPatient_result("12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901");
+        LocalDate date = LocalDate.now();
+        p.setPatientDate(date);
+        p.setGender(gender);
+        p.setProfile(profile);
+        p.setDepartment(department);
+
+        Set<ConstraintViolation<PatientManagement>> result = validator.validate(p);
+        System.out.println("\n\n\n\n\n testPatientResultLessThanMax Success"+"\n\n\n\n\n");
         assertEquals(1, result.size());
         ConstraintViolation<PatientManagement> v = result.iterator().next();
         assertEquals("size must be between 3 and 100", v.getMessage());
-        assertEquals("patientManage", v.getPropertyPath().toString());
+        assertEquals("patient_result", v.getPropertyPath().toString());
     }
-
-    //PatientManage(ผลตรวจ) ต้องมากกว่า 3 ตัวอักษร
+    //patient_result มีความยาวเกิน 3 ตัวอักษร
     @Test
-    void b6008376_testPatientManageTooShort() {
-        PatientManagement patientManagement = new PatientManagement();
-
-
-        patientManagement.setPatientManage("12");
+    void b6008376_testPatientResultMoreThanMin() {
+        Department department = departmentRepository.findById(1);
+        Gender gender = genderRepository.findById(1);
+        Profile profile = profileRepository.findById(1);
+        PatientManagement p = new PatientManagement();
+        p.setTitle_name("นางสาว");
+        p.setName("กมลฉัตร กมลลานนท์");
+        p.setAge(20);
+        p.setPatient_result("12");
         LocalDate date = LocalDate.now();
-        patientManagement.setPatientDate(date);
-        patientManagement.setProfile(profile);
-        patientManagement.setPatient(patient);
-        patientManagement.setDepartment(department);
+        p.setPatientDate(date);
+        p.setGender(gender);
+        p.setProfile(profile);
+        p.setDepartment(department);
 
-        Set<ConstraintViolation<PatientManagement>> result = validator.validate(patientManagement);
-        System.out.println("\n\n\n\n\n testPatientManageTooShort Success"+"\n\n\n\n\n");
+        Set<ConstraintViolation<PatientManagement>> result = validator.validate(p);
+        System.out.println("\n\n\n\n\n testPatientResultMoreThanMin Success"+"\n\n\n\n\n");
         assertEquals(1, result.size());
         ConstraintViolation<PatientManagement> v = result.iterator().next();
         assertEquals("size must be between 3 and 100", v.getMessage());
-        assertEquals("patientManage", v.getPropertyPath().toString());
+        assertEquals("patient_result", v.getPropertyPath().toString());
     }
 
+    //patientDate ต้องไม่ใช่ค่าว่าง
     @Test
-    void b6008376_testPatientManagePattern() {
-        PatientManagement patientManagement = new PatientManagement();
+    void b6008376_testPatientDateMustNotNull() {
 
-
-        patientManagement.setPatientManage("test+");
+        Department department = departmentRepository.findById(1);
+        Gender gender = genderRepository.findById(1);
+        Profile profile = profileRepository.findById(1);
+        PatientManagement p = new PatientManagement();
+        p.setTitle_name("นางสาว");
+        p.setName("กมลฉัตร กมลลานนท์");
+        p.setAge(20);
+        p.setPatient_result("สบายดี");
         LocalDate date = LocalDate.now();
-        patientManagement.setPatientDate(date);
-        patientManagement.setProfile(profile);
-        patientManagement.setPatient(patient);
-        patientManagement.setDepartment(department);
+        p.setPatientDate(null);
+        p.setGender(gender);
+        p.setProfile(profile);
+        p.setDepartment(department);
 
-        Set<ConstraintViolation<PatientManagement>> result = validator.validate(patientManagement);
-        System.out.println("\n\n\n\n\n testPatientManageTooShort Success"+"\n\n\n\n\n");
+        Set<ConstraintViolation<PatientManagement>> result = validator.validate(p);
+        System.out.println("\n\n\n\n\n testPatientDateMustNotNull Success"+"\n\n\n\n\n");
         assertEquals(1, result.size());
         ConstraintViolation<PatientManagement> v = result.iterator().next();
-        assertEquals("must match \"[a-zA-Z0-9ก-๙-]*\"", v.getMessage());
-        assertEquals("patientManage", v.getPropertyPath().toString());
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("patientDate", v.getPropertyPath().toString());
     }
 
-    
-   @Test
-    void b6008376_testPatientManageInsertIsOkay() {
-        PatientManagement patientManagement = new PatientManagement();
-
-
-        patientManagement.setPatientManage("1234");
-        LocalDate date = LocalDate.now();
-        patientManagement.setPatientDate(date);
-        patientManagement.setProfile(profile);
-        patientManagement.setPatient(patient);
-        patientManagement.setDepartment(department);
-
-        patientManagement = patientManagementRepository.saveAndFlush(patientManagement);
-
-        System.out.println("\n\n\n\n\ntestPatientManageInsertIsOkay Success"+"\n\n\n\n\n");
-        System.out.println(patientManagement.getPatientManage());
-        Optional<PatientManagement> found = patientManagementRepository.findById(patientManagement.getPatientManage_id());
-        assertEquals("1234", found.get().getPatientManage());
-        assertEquals(profile, found.get().getProfile());
-        assertEquals(patient, found.get().getPatient());
-        assertEquals(department, found.get().getDepartment());
-        assertEquals(date, found.get().getPatientDate());
-       
-        
-    } 
 }
 
