@@ -34,12 +34,12 @@ export default {
    
   data() {
     return {
-       
-        
-        
-        
-      
-      
+
+
+
+
+
+
       headers: [
         { text: "Doctor", value: "profile.name" },
         { text: "Patient", value: "patientManagement.name" },

@@ -8,6 +8,8 @@
         <h1 class="md-title">Profile Table</h1>
       </md-table-toolbar>
 
+
+
       <md-table-row>
         <md-table-head md-numeric>ID</md-table-head>
         <md-table-head>Department</md-table-head>
@@ -21,6 +23,7 @@
       </md-table-row>
 
       <md-table-row v-for="prof in pro"  :key="prof.profile_id" :value="prof.profile_id">
+
         <md-table-cell >{{prof.profile_id}}</md-table-cell>
         <md-table-cell >{{prof.department.department}}</md-table-cell>
         <md-table-cell>{{prof.name}}</md-table-cell>
@@ -32,8 +35,16 @@
          <md-table-cell>{{prof.address}}</md-table-cell>
       </md-table-row>
 
-      
+
     </md-table>
+                <v-card class="mx-auto" max-width="max-auto">
+                    <v-data-table
+                        hide-default-footer   :headers="headers"
+                          :items="items"
+                          :items-per-page="5"
+                          class="elevation-1"
+                  ></v-data-table>
+                  </v-card>
   </div>
  </center>
 </html>
@@ -64,6 +75,9 @@ data() {
         .then(response => {
           this.pro = response.data;
           console.log(response.data);
+          this.items = response.data;
+
+
         })
         .catch(e => {
           console.log(e);
@@ -141,7 +155,5 @@ data() {
 
 
 <style>
-.md-field{
-  max-width: 800px;
-}
+
 </style>

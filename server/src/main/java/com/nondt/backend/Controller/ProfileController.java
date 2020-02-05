@@ -63,7 +63,7 @@ public class ProfileController {
                         @PathVariable long genderid,
                         @PathVariable String name,
                         @PathVariable long bloodid,
-                        @PathVariable int age,
+                        @PathVariable Integer age,
                         @PathVariable String tel,
                         @PathVariable String address,
                         @PathVariable long matid) 
