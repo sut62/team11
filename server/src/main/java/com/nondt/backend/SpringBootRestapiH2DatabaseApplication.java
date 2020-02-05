@@ -19,7 +19,7 @@ public class SpringBootRestapiH2DatabaseApplication {
     @Bean
     ApplicationRunner init(BloodRepository bloodRepository , DepartmentRepository  departmentRepository, AppointmenttimeRepository appointmenttimeRepository
     , ProfileRepository profileRepository , GenderRepository genderRepository , MaritalstatusRepository maritalstatusRepository 
-    , MedicineRepository MedicineRepository ,PatientRepository patientRepository, TypemedicineRepository typemedicineRepository,WorktimeRepository worktimeRepository, TypepackingRepository typepackingRepository) {
+    , MedicineRepository MedicineRepository , TypemedicineRepository typemedicineRepository,WorktimeRepository worktimeRepository, TypepackingRepository typepackingRepository) {
         return args -> {
 
 
@@ -93,12 +93,7 @@ public class SpringBootRestapiH2DatabaseApplication {
             profile.setMaritalstatus(maritalstatus);
             profileRepository.save(profile);
 
-            Patient patient = new Patient();
-            patient.setTitle_name("นางสาว");
-            patient.setName("OOy suwanan");
-            patient.setGender("หญิง");
-            patient.setAge(Integer.valueOf(20));
-            patientRepository.save(patient);
+
 
         };
     }
