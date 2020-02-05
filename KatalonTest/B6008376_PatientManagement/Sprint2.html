@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+	<title>Sprint2</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">FindDataOkay</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://localhost:8081/<datalist><option>http://localhost:8081/</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//button[@type='button']<datalist><option>//button[@type='button']</option><option>//div[@id='app']/div/main/div/div/div/div/button</option><option>//button</option><option>css=button.v-btn.v-btn--contained.theme--dark.v-size--x-large.red</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=username<datalist><option>id=username</option><option>name=login</option><option>//input[@id='username']</option><option>//div[@id='inspire']/div/main/div/div/div/div/div/div/div/div/div/div/div/form/div/div[2]/div/div/input</option><option>//input</option><option>css=#username</option></datalist></td><td>Doctor</td>
+</tr>
+<tr><td>type</td><td>id=password<datalist><option>id=password</option><option>name=password</option><option>//input[@id='password']</option><option>//div[@id='inspire']/div/main/div/div/div/div/div/div/div/div/div/div/div/form/div[2]/div[2]/div/div/input</option><option>//div[2]/div[2]/div/div/input</option><option>css=#password</option></datalist></td><td>Doctor</td>
+</tr>
+<tr><td>click</td><td>//button[@type='button']<datalist><option>//button[@type='button']</option><option>//div[@id='inspire']/div/main/div/div/div/div/div/div/div/div/div/div/div[2]/button</option><option>//button</option><option>css=button.v-btn.v-btn--contained.v-btn--rounded.theme--dark.v-size--large.blue</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div/main/div/html/div/header/div/div[3]/button[2]/span<datalist><option>//div[@id='app']/div/main/div/html/div/header/div/div[3]/button[2]/span</option><option>//button[2]/span</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=input-name<datalist><option>id=input-name</option><option>//input[@id='input-name']</option><option>//div[@id='app']/div/main/div/html/body/center/div/form/div/div/div/div/div/input</option><option>//input</option><option>css=#input-name</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=input-name<datalist><option>id=input-name</option><option>//input[@id='input-name']</option><option>//div[@id='app']/div/main/div/html/body/center/div/form/div/div/div/div/div/input</option><option>//input</option><option>css=#input-name</option></datalist></td><td>กมลฉัตร กมลลานนท์</td>
+</tr>
+<tr><td>click</td><td>id=click-button<datalist><option>id=click-button</option><option>//button[@id='click-button']</option><option>//div[@id='app']/div/main/div/html/body/center/div/form/div/div[3]/button</option><option>//form/div/div[3]/button</option><option>css=#click-button</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=swal2-content<datalist><option>id=swal2-content</option><option>//div[@id='swal2-content']</option><option>//div[2]/div/div[2]/div</option><option>css=#swal2-content</option></datalist></td><td></td>
+</tr>
+<tr><td>assertText</td><td>id=swal2-content<datalist><option>id=swal2-content</option><option>//div[@id='swal2-content']</option><option>//div[2]/div/div[2]/div</option><option>css=#swal2-content</option></datalist></td><td>ค้นหาข้อมูลสำเร็จ</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">FindDataNotOkay</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://localhost:8081/<datalist><option>http://localhost:8081/</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//button[@type='button']<datalist><option>//button[@type='button']</option><option>//div[@id='app']/div/main/div/div/div/div/button</option><option>//button</option><option>css=button.v-btn.v-btn--contained.theme--dark.v-size--x-large.red</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=username<datalist><option>id=username</option><option>name=login</option><option>//input[@id='username']</option><option>//div[@id='inspire']/div/main/div/div/div/div/div/div/div/div/div/div/div/form/div/div[2]/div/div/input</option><option>//input</option><option>css=#username</option></datalist></td><td>Doctor</td>
+</tr>
+<tr><td>type</td><td>id=password<datalist><option>id=password</option><option>name=password</option><option>//input[@id='password']</option><option>//div[@id='inspire']/div/main/div/div/div/div/div/div/div/div/div/div/div/form/div[2]/div[2]/div/div/input</option><option>//div[2]/div[2]/div/div/input</option><option>css=#password</option></datalist></td><td>Doctor</td>
+</tr>
+<tr><td>click</td><td>//div[@id='inspire']/div/main/div/div/div/div/div/div/div/div/div/div/div[2]/button/span<datalist><option>//div[@id='inspire']/div/main/div/div/div/div/div/div/div/div/div/div/div[2]/button/span</option><option>//span</option><option>css=span.v-btn__content</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div/main/div/html/div/header/div/div[3]/button[2]/span<datalist><option>//div[@id='app']/div/main/div/html/div/header/div/div[3]/button[2]/span</option><option>//button[2]/span</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=input-name<datalist><option>id=input-name</option><option>//input[@id='input-name']</option><option>//div[@id='app']/div/main/div/html/body/center/div/form/div/div/div/div/div/input</option><option>//input</option><option>css=#input-name</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=input-name<datalist><option>id=input-name</option><option>//input[@id='input-name']</option><option>//div[@id='app']/div/main/div/html/body/center/div/form/div/div/div/div/div/input</option><option>//input</option><option>css=#input-name</option></datalist></td><td>กมล</td>
+</tr>
+<tr><td>click</td><td>//button[@id='click-button']/span<datalist><option>//button[@id='click-button']/span</option><option>//form/div/div[3]/button/span</option><option>css=#click-button &gt; span.v-btn__content</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=swal2-content<datalist><option>id=swal2-content</option><option>//div[@id='swal2-content']</option><option>//div[2]/div/div[2]/div</option><option>css=#swal2-content</option></datalist></td><td></td>
+</tr>
+<tr><td>assertText</td><td>id=swal2-content<datalist><option>id=swal2-content</option><option>//div[@id='swal2-content']</option><option>//div[2]/div/div[2]/div</option><option>css=#swal2-content</option></datalist></td><td>ไม่พบข้อมูล</td>
+</tr>
+</tbody></table>
+</body>
+</html>
