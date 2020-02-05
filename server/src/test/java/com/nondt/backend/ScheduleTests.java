@@ -52,7 +52,7 @@ public class ScheduleTests {
         Schedule schedule = new Schedule();
 
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        final LocalDate ScheduleDate = LocalDate.parse("2020-01-30",formatter);
+        final LocalDate ScheduleDate = LocalDate.parse("2020-02-28",formatter);
         
 
         schedule.setScheduleDate(ScheduleDate);
