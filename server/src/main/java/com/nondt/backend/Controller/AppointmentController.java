@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Collection;
@@ -25,7 +26,9 @@ public class AppointmentController {
     @Autowired
     private ProfileRepository profileRepository;
     @Autowired
-    private PatientRepository patientRepository;
+    private PatientManagementRepository patientManagementRepository;
+
+
     public AppointmentController(AppointmentRepository appointmentRepository) {
         this.appointmentRepository = appointmentRepository;
     }
@@ -47,11 +50,11 @@ public class AppointmentController {
                   {
 
                 Profile profile = profileRepository.findById(profileSelect);
-                Patient patient = patientRepository.findById(patSelect);
+                PatientManagement patientManagement = patientManagementRepository.findById(patSelect);
                 Appointmenttime appointmenttime = appointmenttimeRepository.findById(timeappointmentSelect);
                 Appointment appointment = new Appointment();
                 appointment.setCause(remark);
-                appointment.setPatient(patient);
+                appointment.setPatientManagement(patientManagement);
                 appointment.setProfile(profile);
                 appointment.setAppointmenttime(appointmenttime);
 

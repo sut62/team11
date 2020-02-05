@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.FutureOrPresent;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -29,14 +30,14 @@ public class Appointment{
 
 
     @NotNull
-    @Pattern(regexp = "\\w{3,100}")
+    @Pattern(regexp = "[ก-๛A-Za-z0-9]{3,100}")
     private String cause;
 
-
-    
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate datetoday;
     
+    @FutureOrPresent
+     @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dateap;
     
@@ -45,7 +46,7 @@ public class Appointment{
     private Profile profile;
 
     @ManyToOne
-    private Patient patient;
+    private PatientManagement patientManagement;
 
     @ManyToOne
     private Appointmenttime appointmenttime;
@@ -92,14 +93,12 @@ public class Appointment{
         this.profile = profile;
     }
 
-    public Patient getPatient() {
-        return patient;
+    public PatientManagement getPatientManagement(){
+        return patientManagement;
     }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public void setPatientManagement(PatientManagement patientManagement){
+        this.patientManagement = patientManagement;
     }
-
     public Appointmenttime getAppointmenttime() {
         return appointmenttime;
     }
