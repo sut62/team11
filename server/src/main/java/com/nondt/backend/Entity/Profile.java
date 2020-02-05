@@ -23,15 +23,18 @@ public class Profile {
     private Long profile_id;
 
     @NotNull
-    @Pattern(regexp = "[a-zA-Zก-ฮ ]*")
+    @Size(min=3,max=50)
+    @Pattern(regexp = "[a-z0-9A-Zก-๙ ]*")
     private String name;
 
     @NotNull
     @Positive
-    private int age;
+    @Max(100)
+    private Integer age;
 
     @NotNull
-    @Size(min=0,max=80)
+    @Pattern(regexp = "[a-z0-9A-Zก-๙- ]*")
+    @Size(min=5,max=80)
     private String address;
 
     @NotNull

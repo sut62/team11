@@ -78,7 +78,7 @@ public class SpringBootRestapiH2DatabaseApplication {
                 worktimeRepository.save(worktime);
             });
 
-            Department department = departmentRepository.findById(1);
+         /*   Department department = departmentRepository.findById(1);
             Gender gender = genderRepository.findById(1);
             Blood blood = bloodRepository.findById(1);
             Maritalstatus maritalstatus = maritalstatusRepository.findById(1);
@@ -92,7 +92,7 @@ public class SpringBootRestapiH2DatabaseApplication {
             profile.setDepartment(department);
             profile.setMaritalstatus(maritalstatus);
             profileRepository.save(profile);
-
+*/
 
 
         };
