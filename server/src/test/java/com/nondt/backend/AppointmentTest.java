@@ -13,6 +13,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.Set;
 
@@ -30,12 +31,12 @@ public class AppointmentTest {
     @Autowired
     private  ProfileRepository profileRepository;
     @Autowired
-    private  PatientRepository patientRepository;
+    private  PatientManagementRepository patientManagementRepository;
     @Autowired
     private  AppointmenttimeRepository appointmenttimeRepository;
 
     Profile profile = new Profile();
-    Patient patient = new Patient();
+    PatientManagement patientManagement2 = new PatientManagement();
     Appointmenttime appointmenttime = new Appointmenttime();
 
     @BeforeEach
@@ -44,7 +45,7 @@ public class AppointmentTest {
         validator = factory.getValidator();
         long id =1 ;
         profile = profileRepository.findById(id);
-        patient = patientRepository.findById(id);
+        patientManagement2 = patientManagementRepository.findById(id);
         appointmenttime = appointmenttimeRepository.findById(id);
     }
     // Cause Complete
@@ -58,7 +59,7 @@ public class AppointmentTest {
         appointment.setDatetoday(date);
         appointment.setDateap(date);
         appointment.setProfile(profile);
-        appointment.setPatient(patient);
+        appointment.setPatientManagement(patientManagement2);
         appointment.setAppointmenttime(appointmenttime);
         appointment = appointmentRepository.saveAndFlush(appointment);
         System.out.println("\n\n\n\n\ntestCauseOK Success"+"\n\n\n\n\n");
@@ -77,7 +78,7 @@ public class AppointmentTest {
         appointment.setDatetoday(date);
         appointment.setDateap(date);
         appointment.setProfile(profile);
-        appointment.setPatient(patient);
+        appointment.setPatientManagement(patientManagement2);
         appointment.setAppointmenttime(appointmenttime);
         Set<ConstraintViolation<Appointment>> result = validator.validate(appointment);
         System.out.println("\n\n\n\n\ntestCauseMustNotBeNull Success"+"\n\n\n\n\n");
@@ -96,7 +97,7 @@ public class AppointmentTest {
         appointment.setDatetoday(date);
         appointment.setDateap(date);
         appointment.setProfile(profile);
-        appointment.setPatient(patient);
+        appointment.setPatientManagement(patientManagement2);
         appointment.setAppointmenttime(appointmenttime);
 
         Set<ConstraintViolation<Appointment>> result = validator.validate(appointment);
@@ -105,7 +106,7 @@ public class AppointmentTest {
 
         // error message ตรงชนิด และถูก field
         ConstraintViolation<Appointment> v = result.iterator().next();
-        assertEquals("must match \"\\w{3,100}\"", v.getMessage());
+        assertEquals("must match \"[ก-๛A-Za-z0-9]{3,100}\"", v.getMessage());
         assertEquals("cause", v.getPropertyPath().toString());
     }
 
@@ -125,7 +126,7 @@ public class AppointmentTest {
         appointment.setDatetoday(date);
         appointment.setDateap(date);
         appointment.setProfile(profile);
-        appointment.setPatient(patient);
+        appointment.setPatientManagement(patientManagement2);
         appointment.setAppointmenttime(appointmenttime);
 
         Set<ConstraintViolation<Appointment>> result = validator.validate(appointment);
@@ -134,9 +135,99 @@ public class AppointmentTest {
 
         // error message ตรงชนิด และถูก field
         ConstraintViolation<Appointment> v = result.iterator().next();
-        assertEquals("must match \"\\w{3,100}\"", v.getMessage());
+        assertEquals("must match \"[ก-๛A-Za-z0-9]{3,100}\"", v.getMessage());
         assertEquals("cause", v.getPropertyPath().toString());
     }
+
+    @Test
+    void B6018153_testDateSaveOK() {
+        Appointment appointment = new Appointment();
+
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        final LocalDate dateap = LocalDate.parse("2020-05-30",formatter);
+
+        appointment.setCause("ปวดหัว");
+        LocalDate date = LocalDate.now();
+        appointment.setDatetoday(date);
+        appointment.setDateap(dateap);
+        appointment.setProfile(profile);
+        appointment.setPatientManagement(patientManagement2);
+        appointment.setAppointmenttime(appointmenttime);
+
+        appointment = appointmentRepository.saveAndFlush(appointment);
+
+        final Optional<Appointment> found = appointmentRepository.findById(appointment.getAppointment_id());
+        assertEquals(dateap, found.get().getDateap());
+    }
+     //insert Null
+   @Test
+   void B6018153_testDatenull() {
+    Appointment appointment = new Appointment();
+
+       appointment.setDateap(null);
+       appointment.setCause("ป่วย");
+       LocalDate date = LocalDate.now();
+       appointment.setDatetoday(date);
+       appointment.setProfile(profile);
+       appointment.setPatientManagement(patientManagement2);
+       appointment.setAppointmenttime(appointmenttime);
+       Set<ConstraintViolation<Appointment>> result = validator.validate(appointment);
+       // result ต้องมี error 1 ค่าเท่านั้น
+       assertEquals(1, result.size());
+
+       // error message ตรงชนิด และถูก field
+       ConstraintViolation<Appointment> v = result.iterator().next();
+       assertEquals("must not be null", v.getMessage());
+       assertEquals("dateap", v.getPropertyPath().toString());
+       
+   }
+
+   //insert Wrong date
+
+   @Test
+   void B6018153_testDateWrongPast() {
+       Appointment appointment = new Appointment();
+   
+       final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+       final LocalDate dateap = LocalDate.parse("2019-01-20",formatter);
+       appointment.setDateap(dateap);
+       appointment.setCause("ป่วย");
+       LocalDate date = LocalDate.now();
+       appointment.setDatetoday(date);
+       appointment.setProfile(profile);
+       appointment.setPatientManagement(patientManagement2);
+       appointment.setAppointmenttime(appointmenttime);
+       
+       Set<ConstraintViolation<Appointment>> result = validator.validate(appointment);
+       // result ต้องมี error 1 ค่าเท่านั้น
+       assertEquals(1, result.size());
+
+       // error message ตรงชนิด และถูก field
+       ConstraintViolation<Appointment> v = result.iterator().next();
+       assertEquals("must be a date in the present or in the future", v.getMessage());
+       assertEquals("dateap", v.getPropertyPath().toString());
+   }
+   
+   //inert date present ok
+   @Test
+   void B6018153_testDatePresentOK() {
+     Appointment appointment = new Appointment();
+
+       //final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+       final LocalDate dateap = LocalDate.now();
+       appointment.setCause("1234");
+       LocalDate date = LocalDate.now();
+       appointment.setDatetoday(date);
+       appointment.setProfile(profile);
+       appointment.setPatientManagement(patientManagement2);
+       appointment.setAppointmenttime(appointmenttime);
+       appointment.setDateap(dateap);
+       appointment = appointmentRepository.saveAndFlush(appointment);
+
+
+       final Optional<Appointment> found = appointmentRepository.findById(appointment.getAppointment_id());
+       assertEquals(appointment, found.get());
+   }
 
 
 

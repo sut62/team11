@@ -42,7 +42,7 @@ export default {
       
       headers: [
         { text: "Doctor", value: "profile.name" },
-        { text: "Patient", value: "patient.name" },
+        { text: "Patient", value: "patientManagement.name" },
         { text: "Date", value: "dateap" },
         { text: "Time", value: "appointmenttime.timeap" },
         { text: "Cause", value: "cause" },

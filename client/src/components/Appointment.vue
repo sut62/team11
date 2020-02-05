@@ -20,12 +20,12 @@
   <md-field>
           <label>ชื่อผู้ป่วย</label>
           <md-select v-model="patSelect" id="pa" class="pa" >
-                <md-option v-for="pat in patiens" :key="pat.patientManage_id" :value="pat.patientManage_id">{{pat.patient.name}} </md-option>
+                <md-option v-for="pat in patiens" :key="pat.patient_id" :value="pat.patient_id">{{pat.name}} </md-option>
           </md-select>
   </md-field>
 
 
-<md-datepicker v-model="dateSelect" id="da" class="da" >
+<md-datepicker v-model="dateSelect" id="da" class="da" :md-disabled-dates="isDateDisabled">
       <label>วันที่</label>
     </md-datepicker>
 
@@ -55,6 +55,10 @@ export default {
   },
 data() {
     return {
+isDateDisabled: function(date) {
+  // compare if today is greater then the datepickers date
+  return new Date() > date
+},
         timeappointmentSelect : null,
         times : null,
         profileSelect : null,
@@ -63,7 +67,7 @@ data() {
         patiens : null,
         dateSelect : null,
         remark : null,
-
+      
     /*departments : null ,
     bloods : null,
     genders : null,
@@ -108,7 +112,7 @@ data() {
     },
     getPatient() {
       http
-        .get("/patientmanage")
+        .get("/patientmanagement")
         .then(response => {
           this.patiens = response.data;
           console.log(response.data);
