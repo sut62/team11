@@ -84,7 +84,7 @@
     <md-field>
           <label >ชื่อคนไข้</label>
           <md-select id="pm" class="pm" v-model="patSelect">
-                 <md-option v-for="pat in pats" :key="pat.patientManage_id" :value="pat.patientManage_id">{{pat.patient.name}} </md-option>
+                 <md-option v-for="pat in pats" :key="pat.patient_id" :value="pat.patient_id">{{pat.name}} </md-option>
           </md-select>
           
     </md-field>
@@ -156,13 +156,13 @@ data() {
           sortable: false,
           value: "number"
         },
-        { text: "ชื่อยา", value: "patientManagement.patient.name" },
+        { text: "ชื่อยา", value: "medicine.medicine_name" },
         { text: "ชนิด", value: "typemedicine.typemedicine_name" },
         { text: "จำนวน", value: "amount" },
         { text: "ประเภทบรรจุภัณฑ์", value: "typepacking.typepacking_name" },  
         { text: "วันที่จ่ายยา", value: "date" },
         { text: "แพทย์ผู้สั่งจ่ายยา", value: "profile.name" },
-        { text: "คนไข้", value: "patientManagement.patient.name" },
+        { text: "คนไข้", value: "patientManagement.name" },
       ],
 
     desserts:[],
@@ -233,7 +233,7 @@ data() {
           },
            getPatient() {
       http
-        .get("/patientmanage")
+        .get("/patientmanagement")
         .then(response => {   
           this.pats = response.data;
           console.log(response.data);
@@ -266,7 +266,7 @@ data() {
                     )
                     .then(response => {
           console.log(response);
-          this.$alert("กรอกข้อมูลสำเร็จ", "Success", "success").then(() =>
+          this.$alert("บันทึกสำเร็จ", "Success", "success").then(() =>
             console.log("Success",location.reload())
           );
         })
