@@ -272,7 +272,7 @@ data() {
         })
         .catch(e => {
           console.log(e);
-          this.$alert("กรอกข้อมูลไม่สำเร็จ", "Warning", "warning").then(() =>
+          this.$alert("กรอกข้อมูลไม่ครบกรุณากรอกใหม่", "Warning", "warning").then(() =>
             console.log("Closed")
           );
         });
