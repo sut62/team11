@@ -26,6 +26,7 @@ import java.util.Date;
 
 
 
+
 import java.time.LocalDate;
 import java.util.Collection;
 import java.time.format.DateTimeFormatter;
@@ -39,6 +40,12 @@ public class ScheduleTests {
 
     @Autowired
     private ScheduleRepository scheduleRepository;
+    @Autowired
+    private  ProfileRepository profileRepository;
+    @Autowired
+    private  DepartmentRepository departmentRepository;
+    @Autowired
+    private  WorktimeRepository worktimeRepository;
 
     @BeforeEach
     public void setup() {
@@ -49,13 +56,21 @@ public class ScheduleTests {
     // insert OK
     @Test
     void B6008901_testScheduleSaveOK() {
+
+        Profile profile = profileRepository.findById(1);
+        Department department = departmentRepository.findById(1);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate ScheduleDate = LocalDate.parse("2020-02-28",formatter);
+
+        Worktime worktime = worktimeRepository.findById(1);
+
+
         Schedule schedule = new Schedule();
-
-        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        final LocalDate ScheduleDate = LocalDate.parse("2020-02-28",formatter);
-        
-
+        schedule.setProfile_id(profile);
+        schedule.setDepartment_id(department);
         schedule.setScheduleDate(ScheduleDate);
+        schedule.setWorktime(worktime);
         schedule = scheduleRepository.saveAndFlush(schedule);
 
         final Optional<Schedule> found = scheduleRepository.findById(schedule.getScheduleId());
@@ -65,10 +80,18 @@ public class ScheduleTests {
     //insert Null
    @Test
     void B6008901_testSchedulenull() {
-        Schedule schedule = new Schedule();
+        Profile profile = profileRepository.findById(1);
+        Department department = departmentRepository.findById(1);
+        Worktime worktime = worktimeRepository.findById(1);
 
+        Schedule schedule = new Schedule();
+        schedule.setProfile_id(profile);
+        schedule.setDepartment_id(department);
         schedule.setScheduleDate(null);
+        schedule.setWorktime(worktime);
         
+        
+
         Set<ConstraintViolation<Schedule>> result = validator.validate(schedule);
         // result ต้องมี error 1 ค่าเท่านั้น
         assertEquals(1, result.size());
@@ -84,11 +107,20 @@ public class ScheduleTests {
 
     @Test
     void B6008901_testScheduleWrongPast() {
+        
+        Profile profile = profileRepository.findById(1);
+        Department department = departmentRepository.findById(1);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate ScheduleDate = LocalDate.parse("2019-01-20",formatter);
+
+        Worktime worktime = worktimeRepository.findById(1);
+
         Schedule schedule = new Schedule();
-    
-        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        final LocalDate ScheduleDate = LocalDate.parse("2019-01-20",formatter);
+        schedule.setProfile_id(profile);
+        schedule.setDepartment_id(department);
         schedule.setScheduleDate(ScheduleDate);
+        schedule.setWorktime(worktime);
         
         Set<ConstraintViolation<Schedule>> result = validator.validate(schedule);
         // result ต้องมี error 1 ค่าเท่านั้น
@@ -103,13 +135,19 @@ public class ScheduleTests {
     //inert date present ok
     @Test
     void B6008901_testSchedulePresentOK() {
+
+        Profile profile = profileRepository.findById(1);
+        Department department = departmentRepository.findById(1);
+        LocalDate ScheduleDate = LocalDate.now();
+        Worktime worktime = worktimeRepository.findById(1);
+
         Schedule schedule = new Schedule();
-
-        //final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        final LocalDate ScheduleDate = LocalDate.now();
         
-
+        schedule.setProfile_id(profile);
+        schedule.setDepartment_id(department);
         schedule.setScheduleDate(ScheduleDate);
+        schedule.setWorktime(worktime);
+        
         schedule = scheduleRepository.saveAndFlush(schedule);
 
         final Optional<Schedule> found = scheduleRepository.findById(schedule.getScheduleId());
