@@ -26,7 +26,7 @@
      <md-field>
           <label >ชื่อคนไข้</label>
           <md-select id="pat" class="patSelect"  v-model="patSelect">
-                 <md-option id="pat" v-for="pat in pats" :key="pat.patientManage_id" :value="pat.patientManage_id">{{pat.patient.name}} </md-option>
+                 <md-option id="pat" v-for="pat in pats" :key="pat.patient_id" :value="pat.patient_id">{{pat.name}} </md-option>
           </md-select>
     </md-field>
       </div>
@@ -202,7 +202,7 @@ data() {
           value: "id"
         },
         { text: "ชื่อแพทย์", value: "profile.name" },
-        { text: "ชื่อผู้ป่วย", value: "patientManagement.patient.name" },
+        { text: "ชื่อผู้ป่วย", value: "patientManagement.name" },
         { text: "ห้อง", value: "room.room" },
         { text: "วันที่จอง", value: "dateOfBook" },
         { text: "เวลาเริ่มใช้ห้อง", value: "timeOfStart" },
@@ -254,7 +254,7 @@ data() {
     },
     getPatient() {
       http
-        .get("/patientmanage")
+        .get("/patientmanagement")
         .then(response => {   
           this.pats = response.data;
           console.log(response.data);
