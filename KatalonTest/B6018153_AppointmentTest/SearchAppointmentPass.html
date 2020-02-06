@@ -1,0 +1,86 @@
+import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
+import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
+import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
+import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
+import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
+import com.kms.katalon.core.checkpoint.CheckpointFactory as CheckpointFactory
+import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as MobileBuiltInKeywords
+import com.kms.katalon.core.model.FailureHandling as FailureHandling
+import com.kms.katalon.core.testcase.TestCase as TestCase
+import com.kms.katalon.core.testcase.TestCaseFactory as TestCaseFactory
+import com.kms.katalon.core.testdata.TestData as TestData
+import com.kms.katalon.core.testdata.TestDataFactory as TestDataFactory
+import com.kms.katalon.core.testobject.ObjectRepository as ObjectRepository
+import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WSBuiltInKeywords
+import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
+import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUiBuiltInKeywords
+import internal.GlobalVariable as GlobalVariable
+import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
+import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
+import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
+
+import com.thoughtworks.selenium.Selenium
+import org.openqa.selenium.firefox.FirefoxDriver
+import org.openqa.selenium.WebDriver
+import com.thoughtworks.selenium.webdriven.WebDriverBackedSelenium
+import static org.junit.Assert.*
+import java.util.regex.Pattern
+import static org.apache.commons.lang3.StringUtils.join
+
+WebUI.openBrowser('https://www.google.com/')
+def driver = DriverFactory.getWebDriver()
+String baseUrl = "https://www.google.com/"
+selenium = new WebDriverBackedSelenium(driver, baseUrl)
+selenium.open("http://localhost:8081/")
+selenium.click("//div[@id='app']/div/main/div/div/div/div/button/span")
+selenium.click("id=username")
+selenium.type("id=username", "Doctor")
+selenium.click("id=password")
+selenium.type("id=password", "Doctor")
+selenium.click("//div[@id='inspire']/div/main/div/div/div/div/div/div/div/div/div/div/div[2]/button/span")
+selenium.click("css=svg")
+selenium.click("//ul/li/button/div/span")
+selenium.click("css=div.md-menu.md-select.Department > i.md-icon.md-icon-font.md-icon-image.md-theme-default > svg > path")
+selenium.click("//ul/li/button/div")
+selenium.click("//div[@id='app']/div/main/div/html/body/center/div/div[3]/div")
+selenium.type("id=title", "นางสาว")
+selenium.click("//div[@id='app']/div/main/div/html/body/center/div/div[4]")
+selenium.type("id=name", "ศศิประภา ภูขุนทด")
+selenium.click("//div[@id='app']/div/main/div/html/body/center/div/div[5]")
+selenium.click("css=div.md-menu.md-select.Gen > i.md-icon.md-icon-font.md-icon-image.md-theme-default > svg > path")
+selenium.click("//ul/li/button/div/span")
+selenium.click("id=age")
+selenium.type("id=age", "20")
+selenium.click("id=patient")
+selenium.type("id=patient", "ปวดหัว")
+selenium.click("css=i.md-icon.md-icon-font.md-icon-image.md-date-icon.md-theme-default > svg > path")
+selenium.click("//div[8]/span")
+selenium.click("//div[3]/button[2]/div")
+selenium.click("//button[@id='button']/div/div")
+selenium.click("xpath=(//button[@type='button'])[21]")
+selenium.click("//div[@id='app']/div/main/div/html/div/header/div/div[3]/button[7]/span")
+selenium.click("//div[@id='app']/div/main/div/div/div[2]/div/button/span")
+selenium.click("id=input-17")
+selenium.type("id=input-17", "Employee")
+selenium.click("id=password")
+selenium.type("id=password", "Employee")
+selenium.click("//div[@id='inspire']/div/main/div/div/div/div/div/div/div/div/div/div/div[2]/button/span")
+selenium.click("//div[@id='app']/div/main/div/html/div/header/div[2]/div[3]/button[3]/span")
+selenium.click("css=path")
+selenium.click("//ul/li/button/div")
+selenium.click("css=div.md-menu.md-select.pa > i.md-icon.md-icon-font.md-icon-image.md-theme-default > svg > path")
+selenium.click("//ul/li/button/div/span")
+selenium.click("css=i.md-icon.md-icon-font.md-icon-image.md-date-icon.md-theme-default > svg > path")
+selenium.click("//div[15]/span")
+selenium.click("//div[3]/button[2]/div")
+selenium.click("css=div.md-menu.md-select.ti > i.md-icon.md-icon-font.md-icon-image.md-theme-default > svg > path")
+selenium.click("//li[2]/button/div/span")
+selenium.click("id=ca")
+selenium.type("id=ca", "ติดตามอาการ")
+selenium.click("//div[@id='app']/div/main/div/html/body/center")
+selenium.click("//div[@id='app']/div/main/div/html/body/center/button/div/div")
+selenium.click("xpath=(//button[@type='button'])[15]")
+selenium.click("xpath=(//button[@type='button'])[5]")
+selenium.click("//div[@id='app']/div/main/div/html/center/div/div/div/table/tbody/tr/td[2]")
+assertEquals("ศศิประภา ภูขุนทด", selenium.getText("//div[@id='app']/div/main/div/html/center/div/div/div/table/tbody/tr/td[2]"));
