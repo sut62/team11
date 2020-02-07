@@ -19,7 +19,7 @@ public class SpringBootRestapiH2DatabaseApplication {
     @Bean
     ApplicationRunner init(BloodRepository bloodRepository , DepartmentRepository  departmentRepository, AppointmenttimeRepository appointmenttimeRepository
     , ProfileRepository profileRepository , GenderRepository genderRepository , MaritalstatusRepository maritalstatusRepository 
-    , MedicineRepository MedicineRepository , TypemedicineRepository typemedicineRepository,WorktimeRepository worktimeRepository, TypepackingRepository typepackingRepository) {
+    , MedicineRepository MedicineRepository , TypemedicineRepository typemedicineRepository,WorktimeRepository worktimeRepository, TypepackingRepository typepackingRepository ,RoomRepository roomRepository ) {
         return args -> {
 
 
@@ -77,6 +77,16 @@ public class SpringBootRestapiH2DatabaseApplication {
                 worktime.setWork(worktime1);
                 worktimeRepository.save(worktime);
             });
+
+            Stream.of( "ห้องผ่าตัด1","ห้องผ่าตัด2","ห้องผ่าตัด 3","ห้องตรวจ 1","ห้องตรวจ 2","ห้องตรวจภายใน","ห้องฉายรังสี",
+            "ห้อง CT Scan1","ห้อง CT Scan 2","ห้อง X-ray","ห้องกายภาพ").forEach(rooms -> {
+                Room room = new Room();
+                room.setRoom(rooms);
+                roomRepository.save(room);
+            });
+
+
+
 
             Department department = departmentRepository.findById(1);
             Gender gender = genderRepository.findById(1);

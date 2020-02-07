@@ -55,11 +55,10 @@ public class BookRoom {
     @DateTimeFormat(pattern = "HH:mm")
     private LocalTime TimeOfEnd;
     
-    
+    @NotNull
     @Column(name="BookDate ")
-    private @NonNull Date BookDate;
+    private Date BookDate;
     
-
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Profile.class)
     @JoinColumn(name = "profile_id", insertable = true)
     private Profile profile;
@@ -72,4 +71,5 @@ public class BookRoom {
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Room.class)
     @JoinColumn(name = "room_id", insertable = true)
     private Room room;
+
 }

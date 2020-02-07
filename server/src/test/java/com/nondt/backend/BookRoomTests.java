@@ -39,6 +39,16 @@ public class BookRoomTests{
         
     @Autowired
     private BookRoomRepository bookRoomRepository;
+
+    @Autowired
+    private ProfileRepository profileRepository;
+
+    @Autowired
+    private PatientManagementRepository patientManagementRepository;
+
+    @Autowired
+    private RoomRepository roomRepository;
+
     
     @BeforeEach
     public void setup(){
@@ -49,13 +59,18 @@ public class BookRoomTests{
     @Test
     void B6012755_testBookRoomOKFullData(){
         BookRoom bookRoom = new BookRoom();
+        Profile profile = profileRepository.findById(1);
+        PatientManagement patientManagement = patientManagementRepository.findById(1);
+        Room room = roomRepository.findById(1);
         bookRoom.setNote("Test1Test1");
         bookRoom.setDateOfBook(dateOfBook);
         bookRoom.setTimeOfStart(timeOfStart);
         bookRoom.setTimeOfEnd(timeOfEnd);
         bookRoom.setBookDate(bookDate);
+        bookRoom.setProfile(profile);
+        bookRoom.setPatientManagement(patientManagement);
+        bookRoom.setRoom(room);
         
-
         bookRoom = bookRoomRepository.saveAndFlush(bookRoom);
         Optional<BookRoom> found = bookRoomRepository.findById(bookRoom.getId());
         assertEquals("Test1Test1", found.get().getNote());
@@ -63,16 +78,23 @@ public class BookRoomTests{
         assertEquals(timeOfStart, found.get().getTimeOfStart());
         assertEquals(timeOfEnd, found.get().getTimeOfEnd());
         assertEquals(bookDate, found.get().getBookDate());
+        assertEquals(bookRoom, found.get());
     }
 
     @Test
-    void B6012755_testCustomerNameMustNotBeNull() {
+    void B6012755_testNoteMustNotBeNull() {
         BookRoom bookRoom = new BookRoom();
+        Profile profile = profileRepository.findById(1);
+        PatientManagement patientManagement = patientManagementRepository.findById(1);
+        Room room = roomRepository.findById(1);
         bookRoom.setNote(null);
         bookRoom.setDateOfBook(dateOfBook);
         bookRoom.setTimeOfStart(timeOfStart);
         bookRoom.setTimeOfEnd(timeOfEnd);
         bookRoom.setBookDate(bookDate);
+        bookRoom.setProfile(profile);
+        bookRoom.setPatientManagement(patientManagement);
+        bookRoom.setRoom(room);
         
 
         Set<ConstraintViolation<BookRoom>> result = validator.validate(bookRoom);
@@ -87,8 +109,119 @@ public class BookRoomTests{
     }
 
     @Test
+    void B6012755_testDateOfBookMustNotBeNull() {
+        BookRoom bookRoom = new BookRoom();
+        Profile profile = profileRepository.findById(1);
+        PatientManagement patientManagement = patientManagementRepository.findById(1);
+        Room room = roomRepository.findById(1);
+        bookRoom.setNote("Test1Test1");
+        bookRoom.setDateOfBook(null);
+        bookRoom.setTimeOfStart(timeOfStart);
+        bookRoom.setTimeOfEnd(timeOfEnd);
+        bookRoom.setBookDate(bookDate);
+        bookRoom.setProfile(profile);
+        bookRoom.setPatientManagement(patientManagement);
+        bookRoom.setRoom(room);
+        
+
+        Set<ConstraintViolation<BookRoom>> result = validator.validate(bookRoom);
+
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
+
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<BookRoom> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("DateOfBook", v.getPropertyPath().toString());
+    }
+
+    @Test
+    void B6012755_timeOfStartOfBookMustNotBeNull() {
+        BookRoom bookRoom = new BookRoom();
+        Profile profile = profileRepository.findById(1);
+        PatientManagement patientManagement = patientManagementRepository.findById(1);
+        Room room = roomRepository.findById(1);
+        bookRoom.setNote("Test1Test1");
+        bookRoom.setDateOfBook(dateOfBook);
+        bookRoom.setTimeOfStart(null);
+        bookRoom.setTimeOfEnd(timeOfEnd);
+        bookRoom.setBookDate(bookDate);
+        bookRoom.setProfile(profile);
+        bookRoom.setPatientManagement(patientManagement);
+        bookRoom.setRoom(room);
+        
+
+        Set<ConstraintViolation<BookRoom>> result = validator.validate(bookRoom);
+
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
+
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<BookRoom> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("TimeOfStart", v.getPropertyPath().toString());
+    }
+
+    @Test
+    void B6012755_timeOfEndOfBookMustNotBeNull() {
+        BookRoom bookRoom = new BookRoom();
+        Profile profile = profileRepository.findById(1);
+        PatientManagement patientManagement = patientManagementRepository.findById(1);
+        Room room = roomRepository.findById(1);
+        bookRoom.setNote("Test1Test1");
+        bookRoom.setDateOfBook(dateOfBook);
+        bookRoom.setTimeOfStart(timeOfStart);
+        bookRoom.setTimeOfEnd(timeOfEnd);
+        bookRoom.setBookDate(null);
+        bookRoom.setProfile(profile);
+        bookRoom.setPatientManagement(patientManagement);
+        bookRoom.setRoom(room);
+        
+
+        Set<ConstraintViolation<BookRoom>> result = validator.validate(bookRoom);
+
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
+
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<BookRoom> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("BookDate", v.getPropertyPath().toString());
+    }
+
+    @Test
+    void B6012755_bookDateMustNotBeNull() {
+        BookRoom bookRoom = new BookRoom();
+        Profile profile = profileRepository.findById(1);
+        PatientManagement patientManagement = patientManagementRepository.findById(1);
+        Room room = roomRepository.findById(1);
+        bookRoom.setNote("Test1Test1");
+        bookRoom.setDateOfBook(dateOfBook);
+        bookRoom.setTimeOfStart(timeOfStart);
+        bookRoom.setTimeOfEnd(null);
+        bookRoom.setBookDate(bookDate);
+        bookRoom.setProfile(profile);
+        bookRoom.setPatientManagement(patientManagement);
+        bookRoom.setRoom(room);
+        
+
+        Set<ConstraintViolation<BookRoom>> result = validator.validate(bookRoom);
+
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
+
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<BookRoom> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("TimeOfEnd", v.getPropertyPath().toString());
+    }
+    
+    @Test
     void B6012755_testBookRoomWrongPast() {
         BookRoom bookRoom = new BookRoom();
+        Profile profile = profileRepository.findById(1);
+        PatientManagement patientManagement = patientManagementRepository.findById(1);
+        Room room = roomRepository.findById(1);
     
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         final LocalDate DateofBook = LocalDate.parse("2019-01-20",formatter);
@@ -97,6 +230,9 @@ public class BookRoomTests{
         bookRoom.setTimeOfStart(timeOfStart);
         bookRoom.setTimeOfEnd(timeOfEnd);
         bookRoom.setBookDate(bookDate);
+        bookRoom.setProfile(profile);
+        bookRoom.setPatientManagement(patientManagement);
+        bookRoom.setRoom(room);
         
         Set<ConstraintViolation<BookRoom>> result = validator.validate(bookRoom);
         // result ต้องมี error 1 ค่าเท่านั้น
@@ -113,11 +249,19 @@ public class BookRoomTests{
     void B6012755_testNoteNotBeMaxSize() { // ใส่ข้อมูลปกติ
 
         BookRoom bookRoom = new BookRoom();
+        Profile profile = profileRepository.findById(1);
+        PatientManagement patientManagement = patientManagementRepository.findById(1);
+        Room room = roomRepository.findById(1);
+        
+
         bookRoom.setNote("0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789");
         bookRoom.setDateOfBook(dateOfBook);
         bookRoom.setTimeOfStart(timeOfStart);
         bookRoom.setTimeOfEnd(timeOfEnd);
         bookRoom.setBookDate(bookDate);
+        bookRoom.setProfile(profile);
+        bookRoom.setPatientManagement(patientManagement);
+        bookRoom.setRoom(room);
 
         Set<ConstraintViolation<BookRoom>> result = validator.validate(bookRoom);
 
@@ -134,11 +278,20 @@ public class BookRoomTests{
     void B6012755_testNoteNotBeMinSize() { // ใส่ข้อมูลปกติ
 
         BookRoom bookRoom = new BookRoom();
+        Profile profile = profileRepository.findById(1);
+        PatientManagement patientManagement = patientManagementRepository.findById(1);
+        Room room = roomRepository.findById(1);
+
         bookRoom.setNote("test");
         bookRoom.setDateOfBook(dateOfBook);
         bookRoom.setTimeOfStart(timeOfStart);
         bookRoom.setTimeOfEnd(timeOfEnd);
         bookRoom.setBookDate(bookDate);
+        bookRoom.setProfile(profile);
+        bookRoom.setPatientManagement(patientManagement);
+        bookRoom.setRoom(room);
+
+        
 
         Set<ConstraintViolation<BookRoom>> result = validator.validate(bookRoom);
 
