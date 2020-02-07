@@ -477,7 +477,7 @@ public class ProfileTests {
     }
 
     @Test
-    void B6023973_Profile_testGedderNoteNull() {
+    void B6023973_Profile_testGenderNoteNull() {
         Profile profile = new Profile();
         profile.setName("suwanan poedpong");
         profile.setAge(20);
