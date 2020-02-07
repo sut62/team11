@@ -77,9 +77,9 @@ public class ScheduleTests {
         assertEquals(ScheduleDate, found.get().getScheduleDate());
     }
 
-    //insert Null
+    //insert Null date
    @Test
-    void B6008901_testSchedulenull() {
+    void B6008901_testScheduleMustNotNullDate() {
         Profile profile = profileRepository.findById(1);
         Department department = departmentRepository.findById(1);
         Worktime worktime = worktimeRepository.findById(1);
@@ -154,9 +154,86 @@ public class ScheduleTests {
         assertEquals(ScheduleDate, found.get().getScheduleDate());
     }
  
-  
+  //insert Null profile
+  @Test
+  void B6008901_testScheduleMustNotNullName() {
+      
+      Department department = departmentRepository.findById(1);
+      LocalDate ScheduleDate = LocalDate.now();
+      Worktime worktime = worktimeRepository.findById(1);
 
+      Schedule schedule = new Schedule();
+      schedule.setProfile_id(null);
+      schedule.setDepartment_id(department);
+      schedule.setScheduleDate(ScheduleDate);
+      schedule.setWorktime(worktime);
+      
+      
+
+      Set<ConstraintViolation<Schedule>> result = validator.validate(schedule);
+      // result ต้องมี error 1 ค่าเท่านั้น
+      assertEquals(1, result.size());
+
+      // error message ตรงชนิด และถูก field
+      ConstraintViolation<Schedule> v = result.iterator().next();
+      assertEquals("must not be null", v.getMessage());
+      assertEquals("profile_id", v.getPropertyPath().toString());
+      
+  }
+
+  //insert Null department
+  @Test
+  void B6008901_testScheduleMustNotNullDepartment() {
+
+      Profile profile = profileRepository.findById(1);
+      LocalDate ScheduleDate = LocalDate.now();
+      Worktime worktime = worktimeRepository.findById(1);
+
+      Schedule schedule = new Schedule();
+      schedule.setProfile_id(profile);
+      schedule.setDepartment_id(null);
+      schedule.setScheduleDate(ScheduleDate);
+      schedule.setWorktime(worktime);
+      
+      
+
+      Set<ConstraintViolation<Schedule>> result = validator.validate(schedule);
+      // result ต้องมี error 1 ค่าเท่านั้น
+      assertEquals(1, result.size());
+
+      // error message ตรงชนิด และถูก field
+      ConstraintViolation<Schedule> v = result.iterator().next();
+      assertEquals("must not be null", v.getMessage());
+      assertEquals("department_id", v.getPropertyPath().toString());
+      
+  }
     
-    
+     //insert Null worktime
+  @Test
+  void B6008901_testScheduleMustNotNullWorktime() {
+
+      Profile profile = profileRepository.findById(1);
+      Department department = departmentRepository.findById(1);
+      LocalDate ScheduleDate = LocalDate.now();
+     
+
+      Schedule schedule = new Schedule();
+      schedule.setProfile_id(profile);
+      schedule.setDepartment_id(department);
+      schedule.setScheduleDate(ScheduleDate);
+      schedule.setWorktime(null);
+      
+      
+
+      Set<ConstraintViolation<Schedule>> result = validator.validate(schedule);
+      // result ต้องมี error 1 ค่าเท่านั้น
+      assertEquals(1, result.size());
+
+      // error message ตรงชนิด และถูก field
+      ConstraintViolation<Schedule> v = result.iterator().next();
+      assertEquals("must not be null", v.getMessage());
+      assertEquals("worktime", v.getPropertyPath().toString());
+      
+  }
 
 }
