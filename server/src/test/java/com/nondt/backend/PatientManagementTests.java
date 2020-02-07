@@ -304,5 +304,83 @@ public class PatientManagementTests {
         assertEquals("patientDate", v.getPropertyPath().toString());
     }
 
+    //combobox gender ต้องไม่ว่าง
+    @Test
+    void b6008376_testGenderMustNotNull() {
+
+        Department department = departmentRepository.findById(1);
+        Gender gender = genderRepository.findById(1);
+        Profile profile = profileRepository.findById(1);
+        PatientManagement p = new PatientManagement();
+        p.setTitle_name("นางสาว");
+        p.setName("กมลฉัตร กมลลานนท์");
+        p.setAge(20);
+        p.setPatient_result("สบายดี");
+        LocalDate date = LocalDate.now();
+        p.setPatientDate(date);
+        p.setGender(null);
+        p.setProfile(profile);
+        p.setDepartment(department);
+
+        Set<ConstraintViolation<PatientManagement>> result = validator.validate(p);
+        System.out.println("\n\n\n\n\n testGenderMustNotNull Success"+"\n\n\n\n\n");
+        assertEquals(1, result.size());
+        ConstraintViolation<PatientManagement> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("gender", v.getPropertyPath().toString());
+    }
+
+    //combobox profile ต้องไม่ว่าง
+    @Test
+    void b6008376_testProfileMustNotNull() {
+
+        Department department = departmentRepository.findById(1);
+        Gender gender = genderRepository.findById(1);
+        Profile profile = profileRepository.findById(1);
+        PatientManagement p = new PatientManagement();
+        p.setTitle_name("นางสาว");
+        p.setName("กมลฉัตร กมลลานนท์");
+        p.setAge(20);
+        p.setPatient_result("สบายดี");
+        LocalDate date = LocalDate.now();
+        p.setPatientDate(date);
+        p.setGender(gender);
+        p.setProfile(null);
+        p.setDepartment(department);
+
+        Set<ConstraintViolation<PatientManagement>> result = validator.validate(p);
+        System.out.println("\n\n\n\n\n testProfileMustNotNull Success"+"\n\n\n\n\n");
+        assertEquals(1, result.size());
+        ConstraintViolation<PatientManagement> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("profile", v.getPropertyPath().toString());
+    }    
+
+    //combobox department ต้องไม่ว่าง
+    @Test
+    void b6008376_testDepartmentMustNotNull() {
+
+        Department department = departmentRepository.findById(1);
+        Gender gender = genderRepository.findById(1);
+        Profile profile = profileRepository.findById(1);
+        PatientManagement p = new PatientManagement();
+        p.setTitle_name("นางสาว");
+        p.setName("กมลฉัตร กมลลานนท์");
+        p.setAge(20);
+        p.setPatient_result("สบายดี");
+        LocalDate date = LocalDate.now();
+        p.setPatientDate(date);
+        p.setGender(gender);
+        p.setProfile(profile);
+        p.setDepartment(null);
+
+        Set<ConstraintViolation<PatientManagement>> result = validator.validate(p);
+        System.out.println("\n\n\n\n\n testDepartmentMustNotNull Success"+"\n\n\n\n\n");
+        assertEquals(1, result.size());
+        ConstraintViolation<PatientManagement> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("department", v.getPropertyPath().toString());
+    }   
+
 }
 

@@ -53,12 +53,15 @@ public class PatientManagement {
     @Min(1)
     private  int age;
 
+    @NotNull
     @ManyToOne 
     private Profile profile; 
 
+    @NotNull
     @ManyToOne
     private Department department;
 
+    @NotNull
     @ManyToOne
     private Gender gender;
     
