@@ -18,10 +18,10 @@
         
         <br />
         <v-col>
-          <v-text-field label="กรอกชื่อ-สกุลของผู้ป่วย..." outlined dense  solo v-model="Namecheck" :rules="[(v) => !!v || 'กรุณากรอกชื่อ']" required></v-text-field>
+          <v-text-field id="input-name" class="input-name" label="กรอกชื่อ-สกุลของผู้ป่วย..." outlined dense  solo v-model="Namecheck" :rules="[(v) => !!v || 'กรุณากรอกชื่อ']" required></v-text-field>
           <v-spacer></v-spacer>
           <div class="my-2">
-            <v-btn depressed color="primary" @click="getPatientmanagement"  >ค้นหา</v-btn>
+            <v-btn id="click-button" class="click-button" depressed color="primary" @click="getPatientmanagement"  >ค้นหา</v-btn>
             
           </div>
         </v-col>
