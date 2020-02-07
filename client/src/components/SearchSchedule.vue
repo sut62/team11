@@ -97,7 +97,6 @@ export default {
                 })
                 .catch(e => {
                     console.log(e);
-                    this.$alert("ทำรายการไม่สำเร็จ กรุณาทำรายการใหม่", "Warning", "warning")
                 });
         },
         
